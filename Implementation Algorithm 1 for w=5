@@ -161,6 +161,7 @@ if DisCk(Bt6Y) eq 1 then print "The code Bt6Y has minimum distance >=2.";end if;
 
 
 //check constant weight
+WeiCk:=function(Bt6Y);
 W:={};
 for y in Bt6Y do 
      ys:=0;
@@ -169,7 +170,9 @@ for y in Bt6Y do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then print "Bt6Y has constant weight 2t=",Random(W);end if;
+if #W eq 1 then return Random(W); else return 0;end if;
+end function;
+WeiCk(Bt6Y);
 
 
 // the number of codes from classical construction
