@@ -64,6 +64,8 @@ if DisCk(At5) eq 1 then print "The code At5 has minimum distance >=2.";end if;
 
 
 // check the size of At5
+SizCk:=function(t,At5);
+Ck:=0;
 At5size:=0;
 if t mod 3 eq 0 then 
      At5size:=At5size+Binomial(t+w,w)+Binomial(w+t-1,w)/3;
@@ -92,12 +94,14 @@ if t mod 3 eq 2 then
           end if;
      end for;
 end if;
-
-
-if At5size eq #At5 then print "the results about the size in Theorem III.1 are correct.";end if;
+if At5size eq #At5 then Ck:=1;end if;
+return Ck;
+end function;
+if SizCk(t,At5) eq 1 then print "the results about the size in Theorem IV.3 are correct.";end if;
 
 
 //check constant weight
+WeiCk:=function(At5);
 W:={};
 for y in At5 do 
      ys:=0;
@@ -106,4 +110,6 @@ for y in At5 do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then print "At5 has constant weight 2t=",Random(W);end if;
+if #W eq 1 then return Random(W);else return 0;end if;
+end function;
+WeiCk(At5);
