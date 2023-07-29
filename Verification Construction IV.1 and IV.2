@@ -52,6 +52,8 @@ if DisCk(Bt4) eq 1 then print "The code Bt4 has minimum distance >=2.";end if;
 
 
 // check the size of Bt4
+SizCk:=function(t,Bt4);
+Ck:=0;
 Bt4size:=0;
 if t mod 3 eq 0 then 
     Bt4size:=Binomial(t+2,3)+(Binomial(t+3,3)+2*(t+3)/3)/3+2;
@@ -62,7 +64,10 @@ end if;
 if t mod 3 eq 2 then 
     Bt4size:=Binomial(t+2,3)+(Binomial(t+3,3)+2*(t+1)/3)/3+2;
 end if;
-if Bt4size eq #Bt4 then print "the results about the size in Theorem III.1 are correct.";end if;
+if Bt4size eq #Bt4 then Ck:=1;end if;
+return Ck;
+end fucntion;
+if SizCk(t,Bt4) eq 1 then print "the results about the size in Theorem III.1 are correct.";end if;
 
 //check constant weight
 W:={};
