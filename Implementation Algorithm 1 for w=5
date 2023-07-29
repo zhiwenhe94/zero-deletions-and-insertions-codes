@@ -1,0 +1,178 @@
+//---------------------------Implementation Algorithm 1 for w=5------------------------
+t:=3;
+w:=5;
+D:=2;
+a:=(w+1-((w+1) mod 3))/3-1;
+
+SOL:=function(w,t);
+Y:={};
+for y0,ya in [0..t] do 
+    if y0+ya eq t then Y join:={[y0,ya]};end if;
+end for;
+return Y;
+end function;
+
+MAX:=function(S);
+ymax:=Random(S);
+for y in S do 
+     if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=Random(S);
+for y in S do 
+     if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
+end function;
+
+SUB:=function(ymax,y);
+A:={};
+for i in [0..1] do 
+     if y[i+1] eq ymax then A join:={i};end if;
+end for;
+return A;
+end function;
+
+C3:=function(t);
+C3s:={};
+for y0,y1,y2 in [0..t] do 
+    if y0+y1+y2 eq t then 
+        C3s join:={[y0,y1,y2]};
+    end if;
+end for;
+return C3s;
+end function;
+
+Cod0:=function(y);
+Cs:={};
+C3s1:=C3(y[1]);
+C3s2:=C3(y[2]);
+     for c1 in C3s1 do 
+         for c2 in C3s2 do 
+          x:=[0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i]*D;
+          end for;
+          Cs join:={x};
+        end for;
+    end for;
+return Cs;
+end function;
+
+Cod1:=function(i0,y);
+Cs:={};
+B3s:={};
+C3s:={};
+if i0 eq 0 then 
+    B3s:=CsB3(y[1]);
+    C3s:=C3(y[2]);
+   for c1 in B3s do 
+         for c2 in C3s do 
+          x:=[0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i];
+               x[i+3]:=c2[i]*D;
+          end for;
+          Cs join:={x};
+        end for;
+    end for;
+else 
+    B3s:=CsB3(y[2]);
+    C3s:=C3(y[1]);
+   for c1 in C3s do 
+         for c2 in B3s do 
+          x:=[0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i];
+          end for;
+          Cs join:={x};
+        end for;
+    end for;
+end if;
+return Cs;
+end function;            
+
+FINDCODE:=function(w,t);
+Codebk:={};
+Y:=SOL(w,t);
+al:=0;
+if w mod 3 eq 2 then al:=w-2;end if;
+if w mod 3 eq 0 then al:=w-3;end if;
+if w mod 3 eq 1 then al:=w-4;end if;
+for y in Y do 
+     yft:=MAX({y[i+1]:i in [0..1]});
+     Smax:={};
+     for i in [0..1] do 
+         if y[i+1] eq yft then Smax join:={y[i+1]};end if;
+     end for;
+     if #SUB(yft,y) ge 2 then 
+         Codebk join:=Cod0(y);
+     else 
+         i0:=MIN(SUB(yft,y));
+         ysd:=MAX({y[i+1]:i in [0..1]} diff Smax);
+         if yft-ysd ge 2then 
+              Codebk join:=Cod1(i0,y);
+         else 
+              if i0 le MIN(SUB(ysd,y))-1 then 
+                  Codebk join:=Cod1(i0,y);
+              else 
+                  Codebk join:=Cod0(y);
+              end if;
+        end if;
+     end if;
+end for;
+return Codebk;
+end function;
+
+
+// check the minimum distance of Bt6(Y) 
+MAX:=function(S);
+ymax:=0;
+for y in S do 
+    if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+DisCk:=function(A);
+ck:=1;
+for x,y in A do 
+     if x ne y then 
+        Ds:={};
+         for i in [1..6] do 
+              Ds join:={Abs(x[i]-y[i])};
+         end for;
+        if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+     end if;
+end for;
+return ck;
+end function;
+
+Bt6Y:=FINDCODE(w,t);
+if DisCk(Bt6Y) eq 1 then print "The code Bt6Y has minimum distance >=2.";end if;
+
+//size of Bt6Y
+#Bt6Y;
+
+
+//check constant weight
+W:={};
+for y in Bt6Y do 
+     ys:=0;
+     for i in [1..6] do 
+          ys:=ys+y[i];
+     end for;
+    W join:={ys};
+end for;
+if #W eq 1 then print "Bt6Y has constant weight 2t=",Random(W);end if;
+
+
+// the number of codes from classical construction
+Can:=function(t,w);
+return Binomial(t+w,w);
+end function;
