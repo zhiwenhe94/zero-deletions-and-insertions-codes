@@ -1,0 +1,221 @@
+//---------------------Implementation Algorithm 1 for w=7-----------------------------
+t:=3;
+w:=7;
+D:=2;
+a:=(w+1-((w+1) mod 3))/3-1;
+
+SOL:=function(w,t);
+Y:={};
+for y0,ya in [0..t] do 
+    if y0+ya eq t then Y join:={[y0,ya]};end if;
+end for;
+return Y;
+end function;
+
+MAX:=function(S);
+ymax:=Random(S);
+for y in S do 
+     if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=Random(S);
+for y in S do 
+     if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
+end function;
+
+SUB:=function(ymax,y);
+A:={};
+for i in [0..1] do 
+     if y[i+1] eq ymax then A join:={i};end if;
+end for;
+return A;
+end function;
+
+C2:=function(t);
+C2s:={};
+for y0,y1 in [0..t] do 
+    if y0+y1 eq t then 
+        C2s join:={[y0,y1]};
+    end if;
+end for;
+return C2s;
+end function;
+
+C3:=function(t);
+C3s:={};
+for y0,y1,y2 in [0..t] do 
+    if y0+y1+y2 eq t then 
+        C3s join:={[y0,y1,y2]};
+    end if;
+end for;
+return C3s;
+end function;
+
+C5:=function(t);
+C5s:={};
+for y0,y1,y2,y3,y4 in [0..t] do 
+    if y0+y1+y2+y3+y4 eq t then 
+        C5s join:={[y0,y1,y2,y3,y4]};
+    end if;
+end for;
+return C5s;
+end function;
+
+Cod0:=function(y);
+Cs:={};
+C3s1:=C3(y[1]);
+C5s2:=C5(y[2]);
+     for c1 in C3s1 do 
+         for c2 in C5s2 do 
+          x:=[0,0,0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i]*D;
+          end for;
+               x[7]:=c2[4]*D;
+               x[8]:=c2[5]*D;
+          Cs join:={x};
+        end for;
+    end for;
+return Cs;
+end function;
+
+Cod1:=function(i0,y);
+Cs:={};
+B3s:={};
+B5s:={};
+C3s:={};
+C5s:={};
+if i0 eq 0 then 
+B3s:=CsB3(y[1]); 
+C5s:=C5(y[2]);
+   for c1 in B3s do 
+         for c2 in C5s do 
+          x:=[0,0,0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i];
+               x[i+3]:=c2[i]*D;
+          end for;
+               x[7]:=c2[4]*D;
+               x[8]:=c2[5]*D;
+          Cs join:={x};
+        end for;
+    end for;
+else 
+   Ys:={};
+    for s0,s1 in [0..y[2]] do 
+         if s0+s1 eq y[2] then 
+              Ys join:={[s0,s1]};
+         end if;
+     end for;
+    for s in Ys do 
+         B3s1:=CsB3(s[1]);
+         C2s:=C2(s[2]);
+         for sk1 in  B3s1 do 
+              for sk2 in C2s do 
+         x0:=[0,0,0,0,0];
+         x0[1]:=sk1[1];
+         x0[2]:=sk1[2];
+         x0[3]:=sk1[3];
+         x0[4]:=sk2[1]*D;
+         x0[5]:=sk2[2]*D;
+         B5s join:={x0};
+         end for;
+    end for;
+  end for;
+C3s:=C3(y[1]);
+for c1 in C3s do 
+    for c2 in B5s do 
+         x:=[0,0,0,0,0,0,0,0];
+         for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i];
+          end for;
+               x[7]:=c2[4];
+               x[8]:=c2[5];
+               Cs join:={x};
+      end for;
+end for;
+end if;
+return Cs;
+end function;            
+
+FINDCODE:=function(w,t);
+Codebk:={};
+Y:=SOL(w,t);
+al:=0;
+if w mod 3 eq 2 then al:=w-2;end if;
+if w mod 3 eq 0 then al:=w-3;end if;
+if w mod 3 eq 1 then al:=w-4;end if;
+for y in Y do 
+     yft:=MAX({y[i+1]:i in [0..1]});
+     Smax:={};
+     for i in [0..1] do 
+         if y[i+1] eq yft then Smax join:={y[i+1]};end if;
+     end for;
+     if #SUB(yft,y) ge 2 then 
+         Codebk join:=Cod0(y);
+     else 
+         i0:=MIN(SUB(yft,y));
+         print "i0:=",i0;
+         ysd:=MAX({y[i+1]:i in [0..1]} diff Smax);
+         if yft-ysd ge 2then 
+              Codebk join:=Cod1(i0,y);
+         else 
+              if i0 le MIN(SUB(ysd,y))-1 then 
+                  Codebk join:=Cod1(i0,y);
+              else 
+                  Codebk join:=Cod0(y);
+              end if;
+        end if;
+     end if;
+end for;
+return Codebk;
+end function;
+
+
+// check the minimum distance of Bt8(Y) 
+MAX:=function(S);
+ymax:=0;
+for y in S do 
+    if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+DisCk:=function(A);
+ck:=1;
+for x,y in A do 
+     if x ne y then 
+        Ds:={};
+         for i in [1..8] do 
+              Ds join:={Abs(x[i]-y[i])};
+         end for;
+        if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+     end if;
+end for;
+return ck;
+end function;
+
+Bt8Y:=FINDCODE(w,t);
+if DisCk(Bt8Y) eq 1 then print "The code Bt8Y has minimum distance >=2.";end if;
+
+//size of Bt8Y
+#Bt8Y;
+
+
+//check constant weight
+W:={};
+for y in Bt8Y do 
+     ys:=0;
+     for i in [1..8] do 
+          ys:=ys+y[i];
+     end for;
+    W join:={ys};
+end for;
+if #W eq 1 then print "Bt8Y has constant weight 2t=",Random(W);end if;
