@@ -3,7 +3,7 @@ t:=3;
 D:=4;//You can set different D to verify. Note that D is even.
 w:=5;
 
-Ytw:=function(t,w);
+Ytw:=function(t,w,D);
 Ytws:={};
 d:=14;
 for x0,x1,x2,x3,x4,xw in [0..d] do 
@@ -13,7 +13,7 @@ return Ytws;
 end function;
 
 
-Ei:=function();
+Ei:=function(t,D);
 Eis:={};
 for xi,xi1,xi2 in [0..t] do 
      if xi+xi1+xi2 eq t then Eis join:={[xi*D,xi1*D,xi2*D]};end if;
@@ -21,7 +21,7 @@ end for;
 return Eis;
 end function;
 
-Eih:=function(Eis);
+Eih:=function(Eis,D);
 Eihs:={};
 for y in Eis do 
     x:=[0,0,0,0,0,0];
@@ -42,9 +42,9 @@ return Eihs;
 end function;
 
 
-Eb:=function(Ytws)
+Eb:=function(Ytws,D)
 Eis:=Ei();
-Ebs:=Ytws diff Eih(Eis);
+Ebs:=Ytws diff Eih(Eis,D);
 return Ebs;
 end function;
 
@@ -67,7 +67,7 @@ end for;
 return Eibs;
 end function;
 
-OPEi:=function(Eis);
+OPEi:=function(Eis,t,D);
 OPEis:={};
 s:=0;
 if t mod 3 eq 0 then s:=0;end if;
@@ -91,7 +91,7 @@ end for;
 return OPEis;
 end function;
 
-Eip:=function();
+Eip:=function(t,D);
 Eips:={};
 for y0,y1,y2 in [0..t-1] do 
      if y0-y1 mod 3 eq 0 and y0+y1+y2 eq t-1 then Eips join:={[y0*D+D/2,y1*D+D/2,y2*D+D/2]};end if;
@@ -99,12 +99,12 @@ end for;
 return Eips;
 end function;
 
-Atw:=function(t,w);
-Ytws:=Ytw(t,w);
-Atws:=Eb(Ytws);
-Eis:=Ei();
-Eips:=Eip();
-OPEis:=OPEi(Eis);
+Atw:=function(t,w,D);
+Ytws:=Ytw(t,w,D);
+Atws:=Eb(Ytws,D);
+Eis:=Ei(t,D);
+Eips:=Eip(t,D);
+OPEis:=OPEi(Eis,t,D);
 al:=0;
 if w mod 3 eq 2 then al:=w-2;end if;
 if w mod 3 eq 0 then al:=w-3;end if;
@@ -146,6 +146,7 @@ if DisCk(Atws) eq 1 then print "The code Atws has minimum distance >=D.";end if;
 
 
 //check constant weight
+WeiCk:=function(Atws);
 W:={};
 for y in Atws do 
      ys:=0;
@@ -154,10 +155,14 @@ for y in Atws do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then print "Atws has constant weight Dt+D/2=",Random(W);end if;
+if #W eq 1 then return Random(Atws);else return 0;end if;
+end function;
+WeiCk(Atws);
 
 
 //check the number result in Theorem V.2
+SizCk:=function(t,Atws);
+Ck:=0;
 Atwsize:=0;
 if Binomial(t+1,2) mod 3 eq 0 then 
     if (w+1) mod 3 eq 0 then  
@@ -172,5 +177,9 @@ else
    Atwsize:=((Binomial(t+1,2)-(Binomial(t+1,2) mod 3))/3+1)*(w+1-((w+1) mod 3))/3+Binomial(t+w,w); 
    end if;
 end if;
+if #Atws eq Atwsize then Ck:=1;end if;
+return Ck;
+end function;
 
-if #Atws eq Atwsize then print "the results about the size in Theorem V.2 are correct.";end if;
+if SizCk(t,Atws) eq 1 then print "the results about the size in Theorem V.2 are correct.";end if;
+
