@@ -145,7 +145,6 @@ for y in Y do
          Codebk join:=Cod0(y);
      else 
          i0:=MIN(SUB(yft,y));
-         print "i0:=",i0;
          ysd:=MAX({y[i+1]:i in [0..1]} diff Smax);
          if yft-ysd ge 2then 
               Codebk join:=Cod1(i0,y);
