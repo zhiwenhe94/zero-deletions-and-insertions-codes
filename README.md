@@ -1,8 +1,9 @@
 - The operating environment is magma.
 - Due to the limitations of the Magma version and the limited knowledge of Magma by program writers, these programs are not flexible for all parameters. But these programs basically cover the typical case of all results.
 - In addition to the readme file, there are a total of 7 magma program files. Readers can identify the program they want by the file name.
+- Since some functions in certain magma files are defined in other files, it is recommended to sequentially copy the programs into the magma software in the order of "Verification Construction III.1->IV.1->IV.2->IV.3->V.1->Implementation Algorithm 1 for w=5->w=6->w=7".
 
-## Algorithm "Verification Construction III"
+## Algorithm "Verification Construction III.1"
 ### function CsB3(t)
 
 Input: a positive integer t. 
