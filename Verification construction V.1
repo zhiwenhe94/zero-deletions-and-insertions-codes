@@ -43,7 +43,7 @@ end function;
 
 
 Eb:=function(Ytws,D)
-Eis:=Ei();
+Eis:=Ei(t,D);
 Ebs:=Ytws diff Eih(Eis,D);
 return Ebs;
 end function;
@@ -141,7 +141,7 @@ end for;
 return ck;
 end function;
 
-Atws:=Atw(t,w);
+Atws:=Atw(t,w,D);
 if DisCk(Atws) eq 1 then print "The code Atws has minimum distance >=D.";end if;
 
 
