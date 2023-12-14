@@ -117,7 +117,7 @@ end function;
 A3:=CsA3(t);
 if DisCk(A3) eq 1 then print "The code A_t^3 has minimum distance 2.";end if;
 
-// check the size of A_t^3
+// check the size of $A_t^3$
 SizCkb:=function(t,A3);
 Ck:=0;
 A3size:=0;
@@ -171,7 +171,7 @@ Bs join:={[2*(j+2)+1,2*(k+2)+1,2*t-2*k-2*j-9]};
 return Bs;
 end function;
 
-//construct code B_t^3 in Construction III.1 (2)
+//construct code $B_t^3$ in Construction III.1 (2)
 CsB3:=function(t);
 B3:={};
 if t eq 0 then B3:={[0,0,1]};end if;
