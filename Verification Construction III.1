@@ -139,7 +139,7 @@ WeiCk(A3);
 ////By executing the following function, we can obtain a optimal $(w+1,2,2t)=(3,2,2t+1)$ code $B_t^{w+1}$ with length $w+1$, minimum distance $2$ and constant weight $2t$.
 //You can set different t to verify
 t:=3;
-// construct codewords in Table II
+// construct codewords as defined in Table II
 Bp:=function(j,k,t)
 Bs:={};
 Bs join:={[2*j,2*k,2*t-2*j-2*k+1],[2*j+1,2*k+1,2*t-2*k-2*j-1]};
