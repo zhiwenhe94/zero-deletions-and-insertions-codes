@@ -84,6 +84,22 @@ return A3p;
 end function;
 
 // check the minimum distance of $A_t^3$ $D=2$ 
+MAX:=function(S);
+ymax:=0;
+for y in S do 
+    if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=0;
+for y in S do 
+    if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
+end function;
+
 DisCk:=function(A);
 ck:=1;
 for x,y in A do 
@@ -222,6 +238,22 @@ return B3p;
 end function;
 
 // check the minimum distance of $B_t^3$ $D=2$
+MAX:=function(S);
+ymax:=0;
+for y in S do 
+    if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=0;
+for y in S do 
+    if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
+end function;
+
 DisCk:=function(B);
 ck:=1;
 for x,y in B do 
