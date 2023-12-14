@@ -1,8 +1,11 @@
 //---------------------Implementation Algorithm 1 for w=6-----------------------------
-t:=3;//You can set different t to verify
+//By executing the following function, we can obtain a $(w+1,2,2t)=(7,2,6)$ code $A_t^{w+1}(\Y)$ with length $w+1$, distance $2$ and constant weight $2t$.
+//You can set different t to verify
+t:=3;
 w:=6;
 D:=2;
 a:=(w+1-((w+1) mod 3))/3-1;
+
 
 SOL:=function(w,t);
 Y:={};
