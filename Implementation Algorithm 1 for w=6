@@ -6,7 +6,7 @@ w:=6;
 D:=2;
 a:=(w+1-((w+1) mod 3))/3-1;
 
-
+//Obtains the set {(y_0, y_1, ..., y_a): y_i \in [0, t], i \in [0, a], y_0 + y_1 + ... + y_a = t}.
 SOL:=function(w,t);
 Y:={};
 for y0,ya in [0..t] do 
@@ -15,6 +15,7 @@ end for;
 return Y;
 end function;
 
+//Obtains the maximum value in the set S.
 MAX:=function(S);
 ymax:=Random(S);
 for y in S do 
@@ -23,6 +24,7 @@ end for;
 return ymax;
 end function;
 
+//Obtains the minimum value in the set S.
 MIN:=function(S);
 ymin:=Random(S);
 for y in S do 
@@ -31,6 +33,7 @@ end for;
 return ymin;
 end function;
 
+//Obtains the set of indices i for which $y = (y_0, y_1, ..., y_a)$ has values equal to $y_{max}$.
 SUB:=function(ymax,y);
 A:={};
 for i in [0..1] do 
@@ -39,6 +42,7 @@ end for;
 return A;
 end function;
 
+// generate codewords $A_t^{w+1}(\Y)$
 C3:=function(t);
 C3s:={};
 for y0,y1,y2 in [0..t] do 
@@ -164,15 +168,7 @@ return Codebk;
 end function;
 
 
-// check the minimum distance of Bt7(Y) 
-MAX:=function(S);
-ymax:=0;
-for y in S do 
-    if y ge ymax then ymax:=y;end if;
-end for;
-return ymax;
-end function;
-
+// check the minimum distance of $A_t^{w+1}(\Y)$
 DisCk:=function(A);
 ck:=1;
 for x,y in A do 
@@ -187,20 +183,20 @@ end for;
 return ck;
 end function;
 
-Bt7Y:=FINDCODE(w,t);
-if DisCk(Bt7Y) eq 1 then print "The code Bt7Y has minimum distance >=2.";end if;
+At7Y:=FINDCODE(w,t);
+if DisCk(At7Y) eq 1 then print "The code At7Y has minimum distance >=2.";end if;
 
-//size of Bt7Y
-#Bt7Y;
+//size of At7Y
+#At7Y;
 
 
 //check constant weight
 W:={};
-for y in Bt7Y do 
+for y in At7Y do 
      ys:=0;
      for i in [1..7] do 
           ys:=ys+y[i];
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then print "Bt7Y has constant weight 2t=",Random(W);end if;
+if #W eq 1 then print "At7Y has constant weight 2t=",Random(W);end if;
