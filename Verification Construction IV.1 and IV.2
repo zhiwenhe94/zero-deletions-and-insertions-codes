@@ -5,7 +5,7 @@ w:=3;
 //You can set different t to verify
 t:=3;
 
-//------------------------------------------for At4-----------------------------------------------
+//------------------------------------------for $A_t^4$-----------------------------------------------
 CsAt4:=function(t);
 Y:={};
 for y0,y1 in [0..t] do 
@@ -27,7 +27,7 @@ end for;
 return At4;
 end function;
 
-// check the minimum distance of At4 
+// check the minimum distance of $A_t^4$ $D=2$ 
 MAX:=function(S);
 ymax:=0;
 for y in S do 
@@ -62,7 +62,7 @@ At4:=CsAt4(t);
 if DisCk(At4) eq 1 then print "The code At4 has minimum distance 2.";end if;
 
 
-// check the size of At4
+// check the size of $A_t^4$
 SizCk:=function(t,At4);
 Ck:=0;
 At4size:=0;
@@ -101,7 +101,7 @@ D:=2;
 w:=4;
 //You can set different t to verify
 t:=3;
-//------------------------------------------for At5--------------------------------------------------
+//------------------------------------------for $A_t^5$--------------------------------------------------
 C2:=function(t);
 C2s:={};
 for x0,x1 in [0..t] do 
@@ -135,7 +135,7 @@ end for;
 return At5;
 end function;
 
-// check the minimum distance of At5 
+// check the minimum distance of $A_t^5$ $D=2$ 
 MAX:=function(S);
 ymax:=0;
 for y in S do 
@@ -170,7 +170,7 @@ At5:=CsAt5(t);
 if DisCk(At5) eq 1 then print "The code At5 has minimum distance 2.";end if;
 
 
-// check the size of At5
+// check the size of $A_t^5$
 SizCk:=function(t,At5);
 Ck:=0;
 At5size:=0;
