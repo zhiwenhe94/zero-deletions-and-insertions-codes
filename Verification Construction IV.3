@@ -1,8 +1,10 @@
 //-----------------------Verification Construction IV.3 for D=2,w=4--------------------
+//By executing the following function, we can obtain a $(w+1,2,2t)=(5,2,6)$ code $B_t^{w+1}$ with length $w+1$, distance $2$ and constant weight $2t$.
 D:=2;
 w:=4;
-t:=3;//You can set different t to verify
-----------------------------------------for At5----------------------------------------------
+//You can set different t to verify
+t:=3;
+----------------------------------------for $B_t^5$----------------------------------------------
 C2:=function(t);
 C2s:={};
 for x0,x1 in [0..t] do 
@@ -36,13 +38,21 @@ end for;
 return At5;
 end function;
 
-// check the minimum distance of Bt4 
+// check the minimum distance of $B_t^5$ $D=2$
 MAX:=function(S);
 ymax:=0;
 for y in S do 
     if y ge ymax then ymax:=y;end if;
 end for;
 return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=0;
+for y in S do 
+    if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
 end function;
 
 DisCk:=function(A);
@@ -53,57 +63,57 @@ for x,y in A do
          for i in [1..5] do 
               Ds join:={Abs(x[i]-y[i])};
          end for;
-        if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+        if MAX(Ds) le 1 or MIN(Ds) ne 2 then ck:=0;print x,y;break;end if;
      end if;
 end for;
 return ck;
 end function;
 
-At5:=CsAt5(t);
-if DisCk(At5) eq 1 then print "The code At5 has minimum distance >=2.";end if;
+Bt5:=CsBt5(t);
+if DisCk(Bt5) eq 1 then print "The code Bt5 has minimum distance 2.";end if;
 
 
-// check the size of At5
-SizCk:=function(t,At5);
+// check the size of $B_t^5$
+SizCk:=function(t,Bt5);
 Ck:=0;
-At5size:=0;
+Bt5size:=0;
 if t mod 3 eq 0 then 
-     At5size:=At5size+Binomial(t+w,w)+Binomial(w+t-1,w)/3;
+     Bt5size:=Bt5size+Binomial(t+w,w)+Binomial(w+t-1,w)/3;
      for i in [0..t] do 
           if i mod 3 eq 0 then 
-             At5size:=At5size+2*Binomial(w-4+i,i-1)/3;
+             Bt5size:=Bt5size+2*Binomial(w-4+i,i-1)/3;
           end if;
      end for;
 end if;
-At5size;
+Bt5size;
 
 if t mod 3 eq 1 then 
-     At5size:=At5size+Binomial(t+w,w)+(Binomial(w+t-1,w))/3;
+     Bt5size:=Bt5size+Binomial(t+w,w)+(Binomial(w+t-1,w))/3;
      for i in [0..t+2] do 
           if i mod 3 eq 0 then 
-             At5size:=At5size+2*Binomial(w-6+i,i-3)/3;
+             Bt5size:=Bt5size+2*Binomial(w-6+i,i-3)/3;
           end if;
      end for;
 end if;
 
 if t mod 3 eq 2 then 
-     At5size:=At5size+Binomial(t+w,w)+Binomial(w+t-1,w)/3;
+     Bt5size:=Bt5size+Binomial(t+w,w)+Binomial(w+t-1,w)/3;
      for i in [0..t+1] do 
           if i mod 3 eq 0 then 
-             At5size:=At5size+2*Binomial(w-5+i,i-2)/3;
+             Bt5size:=Bt5size+2*Binomial(w-5+i,i-2)/3;
           end if;
      end for;
 end if;
-if At5size eq #At5 then Ck:=1;end if;
+if Bt5size eq #Bt5 then Ck:=1;end if;
 return Ck;
 end function;
-if SizCk(t,At5) eq 1 then print "the results about the size in Theorem IV.3 are correct.";end if;
+if SizCk(t,Bt5) eq 1 then print "the results about the size in Theorem IV.3 are correct.";end if;
 
 
 //check constant weight
-WeiCk:=function(At5);
+WeiCk:=function(Bt5);
 W:={};
-for y in At5 do 
+for y in Bt5 do 
      ys:=0;
      for i in [1..5] do 
           ys:=ys+y[i];
@@ -112,4 +122,4 @@ for y in At5 do
 end for;
 if #W eq 1 then return Random(W);else return 0;end if;
 end function;
-WeiCk(At5);
+WeiCk(Bt5);
