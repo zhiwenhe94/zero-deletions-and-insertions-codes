@@ -175,7 +175,7 @@ Functionality: Used for checking the minimum distance of code $B$.
 
 Input: a code $B$. 
 
-Output: $1$, if the minimum distance of $B$ is $D=4$; $0$, otherwise.
+Output: $1$, if the minimum distance of $B$ is $D$; $0$, otherwise.
 
 ### function $SizCk(t,Btws)$
 
@@ -183,7 +183,7 @@ Functionality: Used for checking the size of $Btws$.
 
 Input: a positive integer $t$ and code $B_t^{w+1}$. 
 
-Output: $1$, if the results about the size of $Btws$ in Theorem V.2 are correct; $0$, otherwise.
+Output: $1$, if the results about the size of $Btws$ in Theorem V.3 are correct; $0$, otherwise.
 
 ### function $WeiCk(B)$
 
@@ -200,7 +200,7 @@ Functionality: Used to obtain a constant weight code $A_t^{w+1}(Y)$ in Algorithm
 
 Input: integers $w$ and $t$ such that $w=5$ and $t>=3$.
 
-Output: a constant weight code $A_t^{w+1}(Y)$ with length $w+1=5$, distance $D=2$ and constant weight $2t$. 
+Output: a constant weight code $A_t^{w+1}(Y)$ with length $w+1=6$, distance $D=2$ and constant weight $2t$. 
 
 ### function $DisCk(A)$
 
