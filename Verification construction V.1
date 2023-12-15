@@ -1,6 +1,8 @@
 //------------------------Verification construction V.1----------------------------------
+//By executing the following function, we can obtain a $(w+1,D,tD+D/2)=(6,4,14)$ code $B_t^{w+1}$ with length $w+1=6$, distance $D=4$ and constant weight $tD+D/2=14$.
 t:=3;
-D:=4;//You can set different D to verify. Note that D is even.
+//You can set different D to verify. Note that D is even and $D>=4$.
+D:=4;
 w:=5;
 
 Ytw:=function(t,w,D);
@@ -99,9 +101,9 @@ end for;
 return Eips;
 end function;
 
-Atw:=function(t,w,D);
+Btw:=function(t,w,D);
 Ytws:=Ytw(t,w,D);
-Atws:=Eb(Ytws,D);
+Btws:=Eb(Ytws,D);
 Eis:=Ei(t,D);
 Eips:=Eip(t,D);
 OPEis:=OPEi(Eis,t,D);
@@ -111,20 +113,28 @@ if w mod 3 eq 0 then al:=w-3;end if;
 if w mod 3 eq 1 then al:=w-4;end if;
 for i in [0..al] do 
       if i mod 3 eq 0 then 
-      Atws:=Atws join Eib(OPEis,Eips,i);
+      Btws:=Btws join Eib(OPEis,Eips,i);
       end if;
 end for;
-return Atws;
+return Btws;
 end function;
 
 
-// check the minimum distance of Bt7(Y) 
+// check the minimum distance of $B_t^{w+1}=B_3^6$ $D=4$
 MAX:=function(S);
 ymax:=0;
 for y in S do 
     if y ge ymax then ymax:=y;end if;
 end for;
 return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=0;
+for y in S do 
+    if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
 end function;
 
 DisCk:=function(A);
@@ -135,20 +145,20 @@ for x,y in A do
          for i in [1..6] do 
               Ds join:={Abs(x[i]-y[i])};
          end for;
-        if MAX(Ds) le D-1 then ck:=0;print x,y;break;end if;
+        if MAX(Ds) le D-1 or MIN(Ds) ne D then ck:=0;print x,y;break;end if;
      end if;
 end for;
 return ck;
 end function;
 
-Atws:=Atw(t,w,D);
-if DisCk(Atws) eq 1 then print "The code Atws has minimum distance >=D.";end if;
+Btws:=Btw(t,w,D);
+if DisCk(Btws) eq 1 then print "The code Btws has minimum distance D.";end if;
 
 
 //check constant weight
-WeiCk:=function(Atws);
+WeiCk:=function(Btws);
 W:={};
-for y in Atws do 
+for y in Btws do 
      ys:=0;
      for i in [1..6] do 
           ys:=ys+y[i];
@@ -157,29 +167,29 @@ for y in Atws do
 end for;
 if #W eq 1 then return Random(W);else return 0;end if;
 end function;
-WeiCk(Atws);
+WeiCk(Btws);
 
 
-//check the number result in Theorem V.2
-SizCk:=function(t,Atws);
+//check the number result in Theorem V.3
+SizCk:=function(t,Btws);
 Ck:=0;
-Atwsize:=0;
+Btwsize:=0;
 if Binomial(t+1,2) mod 3 eq 0 then 
     if (w+1) mod 3 eq 0 then  
-    Atwsize:=Binomial(t+1,2)/3*(w+1)/3+Binomial(t+w,w);
+    Btwsize:=Binomial(t+1,2)/3*(w+1)/3+Binomial(t+w,w);
    else 
-    Atwsize:=Binomial(t+1,2)/3*(w+1-((w+1) mod 3))/3+Binomial(t+w,w);   
+    Btwsize:=Binomial(t+1,2)/3*(w+1-((w+1) mod 3))/3+Binomial(t+w,w);   
    end if;
 else 
     if (w+1) mod 3 eq 0 then  
-   Atwsize:=((Binomial(t+1,2)-(Binomial(t+1,2) mod 3))/3+1)*(w+1)/3+Binomial(t+w,w); 
+   Btwsize:=((Binomial(t+1,2)-(Binomial(t+1,2) mod 3))/3+1)*(w+1)/3+Binomial(t+w,w); 
     else 
-   Atwsize:=((Binomial(t+1,2)-(Binomial(t+1,2) mod 3))/3+1)*(w+1-((w+1) mod 3))/3+Binomial(t+w,w); 
+   Btwsize:=((Binomial(t+1,2)-(Binomial(t+1,2) mod 3))/3+1)*(w+1-((w+1) mod 3))/3+Binomial(t+w,w); 
    end if;
 end if;
-if #Atws eq Atwsize then Ck:=1;end if;
+if #Btws eq Btwsize then Ck:=1;end if;
 return Ck;
 end function;
 
-if SizCk(t,Atws) eq 1 then print "the results about the size in Theorem V.2 are correct.";end if;
+if SizCk(t,Btws) eq 1 then print "the results about the size in Theorem V.3 are correct.";end if;
 
