@@ -185,7 +185,7 @@ return Codebk;
 end function;
 
 
-// check the minimum distance of At8(Y) 
+// check the minimum distance of $A_t^8(\Y)$ $D=2$
 DisCk:=function(A);
 ck:=1;
 for x,y in A do 
@@ -216,4 +216,4 @@ for y in At8Y do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then print "Bt8Y has constant weight 2t=",Random(W);end if;
+if #W eq 1 and Random(W) eq 2*t then print "Bt8Y has constant weight 2t=",2*t;end if;
