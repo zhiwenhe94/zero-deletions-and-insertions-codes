@@ -156,7 +156,7 @@ return ck;
 end function;
 
 At6Y:=FINDCODE(w,t);
-if DisCk(At6Y) eq 1 then print "The code At6Y has minimum distance >=2.";end if;
+if DisCk(At6Y) eq 1 then print "The code At6Y has minimum distance 2.";end if;
 
 //size of At6Y
 #At6Y;
