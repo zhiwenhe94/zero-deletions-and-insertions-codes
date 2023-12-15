@@ -94,14 +94,14 @@ end function;
 
 Cod1:=function(i0,y);
 Cs:={};
-B3s:={};
-B5s:={};
+A3s:={};
+A5s:={};
 C3s:={};
 C5s:={};
 if i0 eq 0 then 
-B3s:=CsB3(y[1]); 
+A3s:=CsA3(y[1]); 
 C5s:=C5(y[2]);
-   for c1 in B3s do 
+   for c1 in A3s do 
          for c2 in C5s do 
           x:=[0,0,0,0,0,0,0,0];
           for i in [1..3] do
@@ -121,9 +121,9 @@ else
          end if;
      end for;
     for s in Ys do 
-         B3s1:=CsB3(s[1]);
+         A3s1:=CsA3(s[1]);
          C2s:=C2(s[2]);
-         for sk1 in  B3s1 do 
+         for sk1 in  A3s1 do 
               for sk2 in C2s do 
          x0:=[0,0,0,0,0];
          x0[1]:=sk1[1];
@@ -131,13 +131,13 @@ else
          x0[3]:=sk1[3];
          x0[4]:=sk2[1]*D;
          x0[5]:=sk2[2]*D;
-         B5s join:={x0};
+         A5s join:={x0};
          end for;
     end for;
   end for;
 C3s:=C3(y[1]);
 for c1 in C3s do 
-    for c2 in B5s do 
+    for c2 in A5s do 
          x:=[0,0,0,0,0,0,0,0];
          for i in [1..3] do
                x[i]:=c1[i]*D;
@@ -188,6 +188,7 @@ end function;
 // check the minimum distance of $A_t^8(\Y)$ $D=2$
 DisCk:=function(A);
 ck:=1;
+Dt:={};
 for x,y in A do 
      if x ne y then 
         Ds:={};
@@ -195,13 +196,15 @@ for x,y in A do
               Ds join:={Abs(x[i]-y[i])};
          end for;
         if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+        Dt join:={MAX(Ds)};
      end if;
 end for;
+if MIN(Dt) eq D then else ck:=0;end if;
 return ck;
 end function;
 
 At8Y:=FINDCODE(w,t);
-if DisCk(At8Y) eq 1 then print "The code At8Y has minimum distance >=2.";end if;
+if DisCk(At8Y) eq 1 then print "The code At8Y has minimum distance 2.";end if;
 
 //size of At8Y
 #At8Y;
