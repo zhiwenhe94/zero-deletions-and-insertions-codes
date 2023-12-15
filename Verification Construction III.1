@@ -242,7 +242,7 @@ end function;
 
 // check the minimum distance of $B_t^3$ $D=2$
 MAX:=function(S);
-ymax:=0;
+ymax:=Random(S);
 for y in S do 
     if y ge ymax then ymax:=y;end if;
 end for;
@@ -250,7 +250,7 @@ return ymax;
 end function;
 
 MIN:=function(S);
-ymin:=0;
+ymin:=Random(S);
 for y in S do 
     if y le ymin then ymin:=y;end if;
 end for;
@@ -259,6 +259,7 @@ end function;
 
 DisCk:=function(B);
 ck:=1;
+Dt:={};
 for x,y in B do 
      if x ne y then 
         Ds:={};
@@ -266,10 +267,13 @@ for x,y in B do
               Ds join:={Abs(x[i]-y[i])};
          end for;
         if MAX(Ds) le 1 or MIN(Ds) ne 2 then ck:=0;print x,y;break;end if;
+        Dt join:={MAX(Ds)};
      end if;
 end for;
+if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
+
 
 B3:=CsB3(t);
 if DisCk(B3) eq 1 then print "The code B3 has minimum distance 2.";end if;
