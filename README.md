@@ -27,7 +27,7 @@ Functionality: Used for checking the constant weight of $A$.
 
 Input: a code $A$.
 
-Output: an integer $s\geq1$, if $A$ has constant weight $s=2t$; $0$, otherwise.
+Output: $2t$, if $A$ has constant weight $2t$; $0$, otherwise.
 
 
 ### function $SizCkb(t,At3)$
@@ -63,7 +63,7 @@ Functionality: Used for checking the constant weight of $B$.
 
 Input: a code $B$.
 
-Output: an integer $s$ greater than $1$, if $B$ has constant weight $s=2t+1$; $0$, otherwise.
+Output: $2t+1$, if $B$ has constant weight $2t+1$; $0$, otherwise.
 
 
 ### function $SizCkb(t,Bt3)$
@@ -111,7 +111,7 @@ Functionality: Used for checking the constant weight of $A$.
 
 Input: a code $A$.
 
-Output: an integer $s\geq1$, if A has constant weight $s=Dt=2t$; $0$, otherwise.
+Output: $2t$, if A has constant weight $Dt=2t$; $0$, otherwise.
 
 
 
@@ -155,7 +155,7 @@ Functionality: Used for checking the constant weight of $B$.
 
 Input: a code $B$.
 
-Output: an integer $s\geq 1$, if B has constant weight $s=2t$; $0$, otherwise.
+Output: $2t$, if B has constant weight $2t$; $0$, otherwise.
 
 
 
@@ -191,7 +191,7 @@ Functionality: Used for checking the constant weight of $B$.
 
 Input: a code $B$.
 
-Output: an integer $s\geq 1$, if $B$ has constant weight $s=3D+D/2$; $0$, otherwise.
+Output: $3D+D/2$, if $B$ has constant weight $3D+D/2$; $0$, otherwise.
 
 ## Implementation Algorithm 1 for $w=5$
 ### function $FINDCODE(w,t)$
@@ -216,7 +216,7 @@ Functionality: Used for checking the constant weight of $A$.
 
 Input: a code $A$.
 
-Output: an integer $s\geq 1$, if $A$ has constant weight $s=2t$; $0$, otherwise.
+Output: $2t$, if $A$ has constant weight $2t$; $0$, otherwise.
 
 ## Implementation Algorithm 1 for $w=6$ and $7$
 **These two cases are similar to the case of $w=5$.**
