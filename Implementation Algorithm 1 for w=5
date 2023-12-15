@@ -139,6 +139,7 @@ end function;
 
 // check the minimum distance of $A_t^{w+1}(\Y)$ $D=2$
 DisCk:=function(A);
+Dt:={};
 ck:=1;
 for x,y in A do 
      if x ne y then 
@@ -147,8 +148,10 @@ for x,y in A do
               Ds join:={Abs(x[i]-y[i])};
          end for;
         if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+        Dt join:={MAX(Ds)};
      end if;
 end for;
+if MIN(Ds) eq D then else ck:=0;end if;
 return ck;
 end function;
 
