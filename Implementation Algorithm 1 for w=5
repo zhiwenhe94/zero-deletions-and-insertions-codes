@@ -137,7 +137,7 @@ return Codebk;
 end function;
 
 
-// check the minimum distance of $A_t^{w+1}(\Y)$ 
+// check the minimum distance of $A_t^{w+1}(\Y)$ $D=2$
 DisCk:=function(A);
 ck:=1;
 for x,y in A do 
