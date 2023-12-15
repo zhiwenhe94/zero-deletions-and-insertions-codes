@@ -29,7 +29,7 @@ end function;
 
 // check the minimum distance of $A_t^4$ $D=2$ 
 MAX:=function(S);
-ymax:=0;
+ymax:=Random(S);
 for y in S do 
     if y ge ymax then ymax:=y;end if;
 end for;
@@ -37,7 +37,7 @@ return ymax;
 end function;
 
 MIN:=function(S);
-ymin:=0;
+ymin:=Random(S);
 for y in S do 
     if y le ymin then ymin:=y;end if;
 end for;
@@ -45,6 +45,7 @@ return ymin;
 end function;
 
 DisCk:=function(A);
+Dt:={};
 ck:=1;
 for x,y in A do 
      if x ne y then 
@@ -52,9 +53,11 @@ for x,y in A do
          for i in [1..4] do 
               Ds join:={Abs(x[i]-y[i])};
          end for;
-        if MAX(Ds) le 1 or MIN(Ds) ne 2 then ck:=0;print x,y;break;end if;
+        if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+        Dt join:={MAX(Ds)};
      end if;
 end for;
+if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
 
@@ -137,7 +140,7 @@ end function;
 
 // check the minimum distance of $A_t^5$ $D=2$ 
 MAX:=function(S);
-ymax:=0;
+ymax:=Random(S);
 for y in S do 
     if y ge ymax then ymax:=y;end if;
 end for;
@@ -145,7 +148,7 @@ return ymax;
 end function;
 
 MIN:=function(S);
-ymin:=0;
+ymin:=Random(S);
 for y in S do 
     if y le ymin then ymin:=y;end if;
 end for;
@@ -154,15 +157,18 @@ end function;
 
 DisCk:=function(A);
 ck:=1;
+Dt:={};
 for x,y in A do 
      if x ne y then 
         Ds:={};
          for i in [1..5] do 
               Ds join:={Abs(x[i]-y[i])};
          end for;
-        if MAX(Ds) le 1 or MIN(Ds) ne 2 then ck:=0;print x,y;break;end if;
+        if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+        Dt join:={MAX(Ds)};
      end if;
 end for;
+if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
 
