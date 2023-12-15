@@ -102,15 +102,18 @@ end function;
 
 DisCk:=function(A);
 ck:=1;
+Dt:={};
 for x,y in A do 
      if x ne y then 
-        Ds:={};
+         Ds:={};
          for i in [1..3] do 
               Ds join:={Abs(x[i]-y[i])};
          end for;
-        if MIN(Ds) ne 2 then ck:=0;break;end if;
+        if MAX(Ds) le 1 then ck:=0;break;end if;
+         Dt join:={MAX(Ds)};
      end if;
 end for;
+if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
 
