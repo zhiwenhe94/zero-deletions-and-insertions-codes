@@ -151,7 +151,7 @@ for x,y in A do
         Dt join:={MAX(Ds)};
      end if;
 end for;
-if MIN(Ds) eq D then else ck:=0;end if;
+if MIN(Dt) eq D then else ck:=0;end if;
 return ck;
 end function;
 
