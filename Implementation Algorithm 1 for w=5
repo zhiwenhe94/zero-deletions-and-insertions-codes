@@ -72,10 +72,10 @@ end function;
 
 Cod1:=function(i0,y);
 Cs:={};
-B3s:={};
+A3s:={};
 C3s:={};
 if i0 eq 0 then 
-    B3s:=CsB3(y[1]);
+    A3s:=CsA3(y[1]);
     C3s:=C3(y[2]);
    for c1 in B3s do 
          for c2 in C3s do 
@@ -88,10 +88,10 @@ if i0 eq 0 then
         end for;
     end for;
 else 
-    B3s:=CsB3(y[2]);
+    A3s:=CsA3(y[2]);
     C3s:=C3(y[1]);
    for c1 in C3s do 
-         for c2 in B3s do 
+         for c2 in A3s do 
           x:=[0,0,0,0,0,0];
           for i in [1..3] do
                x[i]:=c1[i]*D;
@@ -147,7 +147,7 @@ for x,y in A do
          for i in [1..6] do 
               Ds join:={Abs(x[i]-y[i])};
          end for;
-        if MAX(Ds) le 1 then ck:=0;print x,y;break;end if;
+        if MAX(Ds) le 1 then ck:=0;break;end if;
         Dt join:={MAX(Ds)};
      end if;
 end for;
@@ -156,7 +156,7 @@ return ck;
 end function;
 
 At6Y:=FINDCODE(w,t);
-if DisCk(At6Y) eq 1 then print "The code Bt6Y has minimum distance >=2.";end if;
+if DisCk(At6Y) eq 1 then print "The code At6Y has minimum distance >=2.";end if;
 
 //size of At6Y
 #At6Y;
