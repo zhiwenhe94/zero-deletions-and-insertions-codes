@@ -165,7 +165,7 @@ Output: an integer $s\geq 1$, if B has constant weight $s=2t$; $0$, otherwise.
 
 Functionality: Used to obtain a constant weight code $B_t^{w+1}$ in Construction V.1.
 
-Input: positive integers $t=3$,$w=5$ and even $D\geq 4$. 
+Input: positive integers $t=3$, $w=5$ and even $D\geq 4$. 
 
 Output: a constant weight code $B_t^{w+1}$ in Construction V.1 with length $w+1=6$, distance $D$ and constant weight $3D+D/2$..
 
