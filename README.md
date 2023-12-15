@@ -196,11 +196,11 @@ Output: an integer $s\geq 1$, if $B$ has constant weight $s=3D+D/2$; $0$, otherw
 ## Implementation Algorithm 1 for $w=5$
 ### function $FINDCODE(w,t)$
 
-Functionality: Used to obtain a constant weight code $A_t^{w+1}(\Y)$ in Algorithm 1.
+Functionality: Used to obtain a constant weight code $A_t^{w+1}(Y)$ in Algorithm 1.
 
 Input: integers $w$ and $t$ such that $w=5$ and $t>=3$.
 
-Output: a constant weight code $A_t^{w+1}(\Y)$ with length $w+1=5$, distance $D=2$ and constant weight $2t$. 
+Output: a constant weight code $A_t^{w+1}(Y)$ with length $w+1=5$, distance $D=2$ and constant weight $2t$. 
 
 ### function $DisCk(A)$
 
