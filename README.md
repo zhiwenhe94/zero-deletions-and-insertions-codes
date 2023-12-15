@@ -3,105 +3,115 @@
 - In addition to the readme file, there are a total of 7 magma program files. Readers can identify the program they want by the file name.
 
 ## Algorithm "Verification Construction III.1"
-### function CsA3(t)
+### function $CsA3(t)$
 
 Functionality: Used to obtain a constant weight code $A_t^{w+1}=A_3^3$ in Construction III.1(1).
 
-Input: a positive integer t. 
+Input: a positive integer $t$. 
 
 Output: a constant weight code $A_t^{w+1}=A_3^3$ in Construction III.1(1) with length $w+1=3$, minimum distance $D=2$ and constant weight $2t$.
 
-### function DisCk(A)
 
-Functionality: Used for checking the minimum distance of code A.
+### function $DisCk(A)$
 
-Input: a code A.
+Functionality: Used for checking the minimum distance of code $A$.
 
-Output: 1, if the minimum distance of A is $D=2$; 0, otherwise.
+Input: a code $A$.
 
-### function WeiCk(A)
+Output: $1$, if the minimum distance of $A$ is $D=2$; $0$, otherwise.
 
-Functionality: Used for checking the constant weight of A.
 
-Input: a code A.
+### function $WeiCk(A)$
 
-Output: an integer $s$ greater than 1, if A has constant weight $s=2t$; 0, otherwise.
+Functionality: Used for checking the constant weight of $A$.
 
-### function SizCkb(t,At3)
+Input: a code $A$.
 
-Functionality: Used for checking the size of At3.
+Output: an integer $s\geq1$, if $A$ has constant weight $s=2t$; $0$, otherwise.
 
-Input: a positive integer t and code $A_t^{w+1}=A_t^3$.
 
-Output: 1, if the results about the size of $A_t^3$ in Theorem III.1 are correct; 0, otherwise.
+### function $SizCkb(t,At3)$
 
-### function CsB3(t)
+Functionality: Used for checking the size of $At3$.
+
+Input: a positive integer $t$ and code $A_t^{w+1}=A_t^3$.
+
+Output: $1$, if the results about the size of $A_t^3$ in Theorem III.1 are correct; $0$, otherwise.
+
+
+### function $CsB3(t)$
 
 Functionality: Used to obtain a constant weight code $B_t^{w+1}=B_3^3$ in Construction III.1(2).
 
-Input: positive integer t.
+Input: positive integer $t$.
 
 Output: a constant weight code $B_t^{w+1}=B_3^3$ in Construction III.1(2) with length $w+1=3$, minimum distance $D=2$ and constant weight $2t+1$.
 
-### function DisCk(B)
 
-Functionality: Used for checking the minimum distance of code B.
+### function $DisCk(B)$
 
-Input: a code B.
+Functionality: Used for checking the minimum distance of code $B$.
 
-Output: 1, if the minimum distance of B is $D=2$; 0, otherwise.
+Input: a code $B$.
 
-### function WeiCk(B)
+Output: $1$, if the minimum distance of $B$ is $D=2$; $0$, otherwise.
 
-Functionality: Used for checking the constant weight of B.
 
-Input: a code B.
+### function $WeiCk(B)$
 
-Output: an integer $s$ greater than 1, if B has constant weight $s=2t+1$; 0, otherwise.
+Functionality: Used for checking the constant weight of $B$.
 
-### function SizCkb(t,Bt3)
+Input: a code $B$.
 
-Functionality: Used for checking the size of Bt3.
+Output: an integer $s$ greater than $1$, if $B$ has constant weight $s=2t+1$; $0$, otherwise.
 
-Input: a positive integer t and code $B_t^{w+1}=B_t^3$.
 
-Output: 1, if the results about the size of $B_t^3$ in Theorem III.1 are correct; 0, otherwise.
+### function $SizCkb(t,Bt3)$
+
+Functionality: Used for checking the size of $Bt3$.
+
+Input: a positive integer $t$ and code $B_t^{w+1}=B_t^3$.
+
+Output: $1$, if the results about the size of $B_t^3$ in Theorem III.1 are correct; $0$, otherwise.
 
 
 
 ## Algorithm "Verification Construction IV.1"
 
-### function CsAt4(t)
+### function $CsAt4(t)$
 
 Functionality: Used to obtain a constant weight code $A_t^{w+1}=A_t^4$ in Construction IV.1.
 
-Input: a positive integer $t>=3$.
+Input: a positive integer $t\geq3$.
 
-Output: a constant weight code $A_t^{w+1}=A_t^4$ in Construction IV.1 with length $w+1=4$, distance $D=2$ and constant weight $Dt=2t$..
+Output: a constant weight code $A_t^{w+1}=A_t^4$ in Construction IV.1 with length $w+1=4$, distance $D=2$ and constant weight $Dt=2t$.
 
-### function DisCk(A)
 
-Functionality: Used for checking the minimum distance of code A.
+### function $DisCk(A)$
 
-Input: a code A. 
+Functionality: Used for checking the minimum distance of code $A$.
 
-Output: 1, if the minimum distance of A is $D=2$; 0, otherwise.
+Input: a code $A$. 
 
-### function SizCk(t,At4)
+Output: $1$, if the minimum distance of $A$ is $D=2$; $0$, otherwise.
 
-Functionality: Used for checking the size of At3.
 
-Input: a positive integer $t>=3$ and code $A_t^4$.
+### function $SizCk(t,At4)$
 
-Output: 1, if the results about the size of $A_t^4$ in Theorem IV.1 are correct; 0, otherwise.
+Functionality: Used for checking the size of $At4$.
 
-### function WeiCk(A)
+Input: a positive integer $t\geq3$ and code $A_t^4$.
 
-Functionality: Used for checking the constant weight of A.
+Output: $1$, if the results about the size of $A_t^4$ in Theorem IV.1 are correct; $0$, otherwise.
 
-Input: a code A.
 
-Output: an integer $s$ greater than 1, if A has constant weight $s=Dt=2t$; 0, otherwise.
+### function $WeiCk(A)$
+
+Functionality: Used for checking the constant weight of $A$.
+
+Input: a code $A$.
+
+Output: an integer $s\geq1$, if A has constant weight $s=Dt=2t$; $0$, otherwise.
 
 
 
@@ -112,102 +122,104 @@ It is similar to **Algorithm "Verification Construction IV.1"**.
 
 
 ## Algorithm "Verification Construction IV.3"
-### function CsBt5(t)
+### function $CsBt5(t)$
 
 Functionality: Used to obtain a constant weight code $B_t^{w+1}=B_t^5$ in Construction IV.3.
 
-Input: a positive integer $t>=1$.
+Input: a positive integer $t\geq1$.
 
 Output: a constant weight code $B_t^{w+1}=B_t^5$ in Construction IV.3 with length $w+1=5$, distance $D=2$ and constant weight $2t$.
-D:=2;
 
-### function DisCk(B)
 
-Functionality: Used for checking the minimum distance of code B.
+### function $DisCk(B)$
 
-Input: a code B.
+Functionality: Used for checking the minimum distance of code $B$.
 
-Output: 1, if the minimum distance of B is $D=2$; 0, otherwise.
+Input: a code $B$.
 
-### function SizCk(t,Bt5)
+Output: $1$, if the minimum distance of $B$ is $D=2$; $0$, otherwise.
 
-Functionality: Used for checking the size of Bt5.
 
-Input: a positive integer t and code $B_t^{w+1}=B_t^5$. 
+### function $SizCk(t,Bt5)$
 
-Output: 1, if the results about the size of $B_t^5$ in Theorem IV.3 are correct; 0, otherwise.
+Functionality: Used for checking the size of $Bt5$.
 
-### function WeiCk(B)
+Input: a positive integer $t$ and code $B_t^{w+1}=B_t^5$. 
 
-Functionality: Used for checking the constant weight of B.
+Output: $1$, if the results about the size of $B_t^5$ in Theorem IV.3 are correct; $0$, otherwise.
 
-Input: a code B.
 
-Output: an integer $s$ greater than 1, if B has constant weight $s=2t$; 0, otherwise.
+### function $WeiCk(B)$
+
+Functionality: Used for checking the constant weight of $B$.
+
+Input: a code $B$.
+
+Output: an integer $s\geq 1$, if B has constant weight $s=2t$; $0$, otherwise.
 
 
 
 ## Algorithm "Verification Construction V.1"
 
-### function Btw(t,w,D)
+### function $Btw(t,w,D)$
 
 Functionality: Used to obtain a constant weight code $B_t^{w+1}$ in Construction V.1.
 
-Input: positive integers $t=3$,$w=5$ and even $D>=4$. 
+Input: positive integers $t=3$,$w=5$ and even $D\geq 4$. 
 
 Output: a constant weight code $B_t^{w+1}$ in Construction V.1 with length $w+1=6$, distance $D$ and constant weight $3D+D/2$..
 
-### function DisCk(B)
+### function $DisCk(B)$
 
-Functionality: Used for checking the minimum distance of code B.
+Functionality: Used for checking the minimum distance of code $B$.
 
-Input: a code B. 
+Input: a code $B$. 
 
-Output: 1, if the minimum distance of B is $D=4$; 0, otherwise.
+Output: $1$, if the minimum distance of $B$ is $D=4$; $0$, otherwise.
 
-### function SizCk(t,Btws)
+### function $SizCk(t,Btws)$
 
-Functionality: Used for checking the size of Btws.
+Functionality: Used for checking the size of $Btws$.
 
-Input: a positive integer t and code $B_t^{w+1}$. 
+Input: a positive integer $t$ and code $B_t^{w+1}$. 
 
-Output: 1, if the results about the size of Btws in Theorem V.2 are correct; 0, otherwise.
+Output: $1$, if the results about the size of $Btws$ in Theorem V.2 are correct; $0$, otherwise.
 
-### function WeiCk(B)
+### function $WeiCk(B)$
 
-Functionality: Used for checking the constant weight of B.
+Functionality: Used for checking the constant weight of $B$.
 
-Input: a code B.
+Input: a code $B$.
 
-Output: an integer s greater than 1, if B has constant weight $s=3D+D/2$; 0, otherwise.
+Output: an integer $s\geq 1$, if $B$ has constant weight $s=3D+D/2$; $0$, otherwise.
 
-## Implementation Algorithm 1 for w=5
-### function FINDCODE(w,t)
+## Implementation Algorithm 1 for $w=5$
+### function $FINDCODE(w,t)$
 
 Functionality: Used to obtain a constant weight code $A_t^{w+1}(\Y)$ in Algorithm 1.
 
-Input: integers w and t such that $w=5$ and $t>=3$.
+Input: integers $w$ and $t$ such that $w=5$ and $t>=3$.
 
 Output: a constant weight code $A_t^{w+1}(\Y)$ with length $w+1=5$, distance $D=2$ and constant weight $2t$. 
 
-### function DisCk(A)
+### function $DisCk(A)$
 
-Functionality: Used for checking the minimum distance of code A.
+Functionality: Used for checking the minimum distance of code $A$.
 
-Input: a code B.
+Input: a code $A$.
 
-Output: 1, if the minimum distance of B is $D=2$; 0, otherwise.
+Output: $1$, if the minimum distance of $A$ is $D=2$; $0$, otherwise.
 
-### function WeiCk(A)
+### function $WeiCk(A)$
 
-Functionality: Used for checking the constant weight of B.
+Functionality: Used for checking the constant weight of $A$.
 
-Input: a code A.
+Input: a code $A$.
 
-Output: an integer s greater than 1, if A has constant weight $s=2t$; 0, otherwise.
+Output: an integer $s\geq 1$, if $A$ has constant weight $s=2t$; $0$, otherwise.
 
-## Implementation Algorithm 1 for w=6 and 7
-**These two cases are similar to the case of w=5.**
+## Implementation Algorithm 1 for $w=6$ and $7$
+**These two cases are similar to the case of $w=5$.**
 
 
 
