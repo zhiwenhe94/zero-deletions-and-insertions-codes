@@ -168,7 +168,7 @@ for y in At6Y do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then return Random(W); else return 0;end if;
+if #W eq 1 and Random(W) eq 2*t then return 2*t; else return 0;end if;
 end function;
 WeiCk(At6Y);
 
