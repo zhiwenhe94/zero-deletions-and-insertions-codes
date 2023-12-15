@@ -145,7 +145,7 @@ for x,y in A do
          for i in [1..6] do 
               Ds join:={Abs(x[i]-y[i])};
          end for;
-        if MAX(Ds) le D-1 or MIN(Ds) ne D then ck:=0;print x,y;break;end if;
+        if MAX(Ds) le D-1 or MIN(Ds) ne D then ck:=0;break;end if;
      end if;
 end for;
 return ck;
