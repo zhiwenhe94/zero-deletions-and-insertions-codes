@@ -13,17 +13,17 @@ end for;
 return C2s;
 end function;
 
-CsAt5:=function(t);
+CsBt5:=function(t);
 Y:={};
 for y0,y1 in [0..t] do 
      if y0+y1 eq t then Y join:={[y0,y1]};end if;
 end for;
 
-At5:={};
+Bt5:={};
 for y in Y do 
-     A3:=CsA3(y[1]);
+     B3:=CsB3(y[1]);
      C2s:=C2(y[2]);
-     for g1 in A3 do 
+     for g1 in B3 do 
           for g2 in C2s do 
                x:=[0,0,0,0,0];
                x[1]:=g1[1];
@@ -31,11 +31,11 @@ for y in Y do
                x[3]:=g1[3];
                x[4]:=g2[1]*D;
                x[5]:=g2[2]*D;
-               At5 join:={x};
+               Bt5 join:={x};
          end for;
      end for;
 end for;
-return At5;
+return Bt5;
 end function;
 
 // check the minimum distance of $B_t^5$ $D=2$
