@@ -1,0 +1,887 @@
+//When $t=3$, $w=5,6,7$, comparisons between codes $\C_t^{w+1}$, $A_t^{w+1}$, and $A_t^{w+1}(\Y)$.
+// -----------------t=3,w=5---------------------
+t:=3;
+w:=5;
+D:=2;
+//Generate code $C_t^{w+1}=C_3^6$
+CCG:=function(w,t);
+Y:={};
+for y0,y1,y2,y3,y4,y5 in [0..t] do 
+    if y0+y1+y2+y3+y4+y5 eq t then Y join:={[y0*D,y1*D,y2*D,y3*D,y4*D,y5*D]};end if;
+end for;
+return Y;
+end function;
+Ct6:=CCG(w,t);
+
+//Generate code $A_t^{w+1}=A_3^6$
+C3:=function(t);
+C3s:={};
+for x0,x1,x2 in [0..t] do 
+    if x0+x1+x2 eq t then C3s join:={[x0,x1,x2]};end if;
+end for;
+return C3s;
+end function;
+
+Ap:=function(j,k,t)
+As:={};
+As join:={[2*j,2*k,2*t-2*j-2*k],[2*j+1,2*k+1,2*t-2*k-2*j-2]};
+As join:={[2*j,2*k+3,2*t-2*k-2*j-3]};
+As join:={[2*j+1,2*k+4,2*t-2*k-2*j-5]};
+As join:={[2*(j+1)+1,2*k,2*t-2*k-2*j-3]};
+As join:={[2*(j+1),2*(k+1),2*t-2*k-2*j-4],[2*(j+1)+1,2*(k+1)+1,2*t-2*k-2*j-6]};
+As join:={[2*(j+1),2*(k+2)+1,2*t-2*k-2*j-7]};
+As join:={[2*(j+2),2*k+1,2*t-2*k-2*j-5]};
+As join:={[2*(j+2)+1,2*(k+1),2*t-2*k-2*j-7]};
+As join:={[2*(j+2),2*(k+2),2*t-2*k-2*j-8]};
+As join:={[2*(j+2)+1,2*(k+2)+1,2*t-2*k-2*j-10]};
+return As;
+end function;
+
+CsA3:=function(t);
+A3:={};
+if t eq 0 then A3:={[0,0,0]};end if;
+if t eq 1 then A3:={[2,0,0],[0,2,0],[0,0,2]};end if;
+if t eq 2 then A3:={[0,2,2],[2,0,2],[2,2,0],[4,0,0],[0,4,0],[0,0,4]};end if;
+if t ge 3 then 
+if t mod 3 eq 0 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 0 and j mod 3 eq 0 and i+j eq t then 
+              l:=6;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-6,6],[2*j+1,2*i-5,4],[2*j,2*i-3,3],[2*j+1,2*i-2,1],[2*j,2*i,0]};
+            A3 join:={[2*j+3,2*i-6,3],[2*j+2,2*i-4,2],[2*j+3,2*i-3,0]};
+            A3 join:={[2*j+4,2*i-5,1]};
+            A3 join:={[2*t,0,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 1 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 1 and j mod 3 eq 0 and i+j eq t then 
+              l:=4;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-2,2],[2*j+1,2*i-1,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 2 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 2 and j mod 3 eq 0 and i+j eq t then 
+              l:=5;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-4,4],[2*j+1,2*i-3,2],[2*j,2*i-1,1]};
+            A3 join:={[2*j+3,2*i-4,1],[2*j+2,2*i-2,0]};
+      end if;
+    end for;
+end if;
+end if;
+A3p:={};
+for x in A3 do 
+     s:=1;
+     for i in [1..3] do 
+         if x[i] le -1 then s:=0;end if;
+     end for;
+     if s eq 1 then A3p join:={x};end if;
+end for;
+return A3p;
+end function;
+
+
+CsAt6:=function(t);
+Y:={};
+for y0,y1 in [0..t] do 
+     if y0+y1 eq t then Y join:={[y0,y1]};end if;
+end for;
+
+At6:={};
+for y in Y do 
+     A3:=CsA3(y[1]);
+     C3s:=C3(y[2]);
+     for g1 in A3 do 
+          for g2 in C3s do 
+               x:=[0,0,0,0,0,0];
+               x[1]:=g1[1];
+               x[2]:=g1[2];
+               x[3]:=g1[3];
+               x[4]:=g2[1]*D;
+               x[5]:=g2[2]*D;
+               x[6]:=g2[3]*D;
+               At6 join:={x};
+         end for;
+     end for;
+end for;
+return At6;
+end function;
+
+At6:=CsAt6(t);
+
+//Generate code $A_t^{w+1}(\Y)=A_3^6(\Y)$
+a:=(w+1-((w+1) mod 3))/3-1;
+SOL:=function(w,t);
+Y:={};
+for y0,ya in [0..t] do 
+    if y0+ya eq t then Y join:={[y0,ya]};end if;
+end for;
+return Y;
+end function;
+
+MAX:=function(S);
+ymax:=Random(S);
+for y in S do 
+     if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=Random(S);
+for y in S do 
+     if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
+end function;
+
+SUB:=function(ymax,y);
+A:={};
+for i in [0..1] do 
+     if y[i+1] eq ymax then A join:={i};end if;
+end for;
+return A;
+end function;
+
+C3:=function(t);
+C3s:={};
+for y0,y1,y2 in [0..t] do 
+    if y0+y1+y2 eq t then 
+        C3s join:={[y0,y1,y2]};
+    end if;
+end for;
+return C3s;
+end function;
+
+Cod0:=function(y);
+Cs:={};
+C3s1:=C3(y[1]);
+C3s2:=C3(y[2]);
+     for c1 in C3s1 do 
+         for c2 in C3s2 do 
+          x:=[0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i]*D;
+          end for;
+          Cs join:={x};
+        end for;
+    end for;
+return Cs;
+end function;
+
+Cod1:=function(i0,y);
+Cs:={};
+A3s:={};
+C3s:={};
+if i0 eq 0 then 
+    A3s:=CsA3(y[1]);
+    C3s:=C3(y[2]);
+   for c1 in A3s do 
+         for c2 in C3s do 
+          x:=[0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i];
+               x[i+3]:=c2[i]*D;
+          end for;
+          Cs join:={x};
+        end for;
+    end for;
+else 
+    A3s:=CsA3(y[2]);
+    C3s:=C3(y[1]);
+   for c1 in C3s do 
+         for c2 in A3s do 
+          x:=[0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i];
+          end for;
+          Cs join:={x};
+        end for;
+    end for;
+end if;
+return Cs;
+end function;            
+
+FINDCODE:=function(w,t);
+Codebk:={};
+Y:=SOL(w,t);
+al:=0;
+if w mod 3 eq 2 then al:=w-2;end if;
+if w mod 3 eq 0 then al:=w-3;end if;
+if w mod 3 eq 1 then al:=w-4;end if;
+for y in Y do 
+     yft:=MAX({y[i+1]:i in [0..1]});
+     Smax:={};
+     for i in [0..1] do 
+         if y[i+1] eq yft then Smax join:={y[i+1]};end if;
+     end for;
+     if #SUB(yft,y) ge 2 then 
+         Codebk join:=Cod0(y);
+     else 
+         i0:=MIN(SUB(yft,y));
+         ysd:=MAX({y[i+1]:i in [0..1]} diff Smax);
+         if yft-ysd ge 2then 
+              Codebk join:=Cod1(i0,y);
+         else 
+              if i0 le MIN(SUB(ysd,y))-1 then 
+                  Codebk join:=Cod1(i0,y);
+              else 
+                  Codebk join:=Cod0(y);
+              end if;
+        end if;
+     end if;
+end for;
+return Codebk;
+end function;
+
+At6Y:=FINDCODE(w,t);
+
+print "the sizes of C_3^6, A_3^6 and A_3^6(\Y) are: ",#Ct6,#At6,#At6Y;
+
+//Verify if they are equal
+if Ct6 eq At6 then print "C_3^6 eq A_3^6";else print "C_3^6 is not eq A_3^6";end if;
+if Ct6 eq At6Y then print "C_3^6 eq A_3^6(\Y)"; else print "C_3^6 is not eq A_3^6(\Y)";end if;
+if At6 eq At6Y then print "At6 eq A_3^6(\Y)";else print "At6 is not eq A_3^6(\Y)";end if;
+
+// -----------------t=3,w=6---------------------
+
+t:=3;
+w:=6;
+D:=2;
+//Generate code $C_t^{w+1}=C_3^7$
+CCG:=function(w,t);
+Y:={};
+for y0,y1,y2,y3,y4,y5,y6 in [0..t] do 
+    if y0+y1+y2+y3+y4+y5+y6 eq t then Y join:={[y0*D,y1*D,y2*D,y3*D,y4*D,y5*D,y6*D]};end if;
+end for;
+return Y;
+end function;
+Ct7:=CCG(w,t);
+
+//Generate code $A_t^{w+1}=A_3^7$
+C4:=function(t);
+C4s:={};
+for x0,x1,x2,x3 in [0..t] do 
+    if x0+x1+x2+x3 eq t then C4s join:={[x0,x1,x2,x3]};end if;
+end for;
+return C4s;
+end function;
+
+Ap:=function(j,k,t)
+As:={};
+As join:={[2*j,2*k,2*t-2*j-2*k],[2*j+1,2*k+1,2*t-2*k-2*j-2]};
+As join:={[2*j,2*k+3,2*t-2*k-2*j-3]};
+As join:={[2*j+1,2*k+4,2*t-2*k-2*j-5]};
+As join:={[2*(j+1)+1,2*k,2*t-2*k-2*j-3]};
+As join:={[2*(j+1),2*(k+1),2*t-2*k-2*j-4],[2*(j+1)+1,2*(k+1)+1,2*t-2*k-2*j-6]};
+As join:={[2*(j+1),2*(k+2)+1,2*t-2*k-2*j-7]};
+As join:={[2*(j+2),2*k+1,2*t-2*k-2*j-5]};
+As join:={[2*(j+2)+1,2*(k+1),2*t-2*k-2*j-7]};
+As join:={[2*(j+2),2*(k+2),2*t-2*k-2*j-8]};
+As join:={[2*(j+2)+1,2*(k+2)+1,2*t-2*k-2*j-10]};
+return As;
+end function;
+
+CsA3:=function(t);
+A3:={};
+if t eq 0 then A3:={[0,0,0]};end if;
+if t eq 1 then A3:={[2,0,0],[0,2,0],[0,0,2]};end if;
+if t eq 2 then A3:={[0,2,2],[2,0,2],[2,2,0],[4,0,0],[0,4,0],[0,0,4]};end if;
+if t ge 3 then 
+if t mod 3 eq 0 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 0 and j mod 3 eq 0 and i+j eq t then 
+              l:=6;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-6,6],[2*j+1,2*i-5,4],[2*j,2*i-3,3],[2*j+1,2*i-2,1],[2*j,2*i,0]};
+            A3 join:={[2*j+3,2*i-6,3],[2*j+2,2*i-4,2],[2*j+3,2*i-3,0]};
+            A3 join:={[2*j+4,2*i-5,1]};
+            A3 join:={[2*t,0,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 1 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 1 and j mod 3 eq 0 and i+j eq t then 
+              l:=4;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-2,2],[2*j+1,2*i-1,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 2 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 2 and j mod 3 eq 0 and i+j eq t then 
+              l:=5;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-4,4],[2*j+1,2*i-3,2],[2*j,2*i-1,1]};
+            A3 join:={[2*j+3,2*i-4,1],[2*j+2,2*i-2,0]};
+      end if;
+    end for;
+end if;
+end if;
+A3p:={};
+for x in A3 do 
+     s:=1;
+     for i in [1..3] do 
+         if x[i] le -1 then s:=0;end if;
+     end for;
+     if s eq 1 then A3p join:={x};end if;
+end for;
+return A3p;
+end function;
+
+CsAt7:=function(t);
+Y:={};
+for y0,y1 in [0..t] do 
+     if y0+y1 eq t then Y join:={[y0,y1]};end if;
+end for;
+
+At7:={};
+for y in Y do 
+     A3:=CsA3(y[1]);
+     C4s:=C4(y[2]);
+     for g1 in A3 do 
+          for g2 in C4s do 
+               x:=[0,0,0,0,0,0,0];
+               x[1]:=g1[1];
+               x[2]:=g1[2];
+               x[3]:=g1[3];
+               x[4]:=g2[1]*D;
+               x[5]:=g2[2]*D;
+               x[6]:=g2[3]*D;
+               x[7]:=g2[4]*D;
+               At7 join:={x};
+         end for;
+     end for;
+end for;
+return At7;
+end function;
+
+At7:=CsAt7(t);
+
+//Generate code $A_t^{w+1}(\Y)=A_3^7(\Y)$
+a:=(w+1-((w+1) mod 3))/3-1;
+SOL:=function(w,t);
+Y:={};
+for y0,ya in [0..t] do 
+    if y0+ya eq t then Y join:={[y0,ya]};end if;
+end for;
+return Y;
+end function;
+
+MAX:=function(S);
+ymax:=Random(S);
+for y in S do 
+     if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=Random(S);
+for y in S do 
+     if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
+end function;
+
+SUB:=function(ymax,y);
+A:={};
+for i in [0..1] do 
+     if y[i+1] eq ymax then A join:={i};end if;
+end for;
+return A;
+end function;
+
+C3:=function(t);
+C3s:={};
+for y0,y1,y2 in [0..t] do 
+    if y0+y1+y2 eq t then 
+        C3s join:={[y0,y1,y2]};
+    end if;
+end for;
+return C3s;
+end function;
+
+C4:=function(t);
+C4s:={};
+for y0,y1,y2,y3 in [0..t] do 
+    if y0+y1+y2+y3 eq t then 
+        C4s join:={[y0,y1,y2,y3]};
+    end if;
+end for;
+return C4s;
+end function;
+
+Cod0:=function(y);
+Cs:={};
+C3s1:=C3(y[1]);
+C4s2:=C4(y[2]);
+     for c1 in C3s1 do 
+         for c2 in C4s2 do 
+          x:=[0,0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i]*D;
+          end for;
+               x[7]:=c2[4]*D;
+          Cs join:={x};
+        end for;
+    end for;
+return Cs;
+end function;
+
+Cod1:=function(i0,y);
+Cs:={};
+A3s:={};
+A4s:={};
+C3s:={};
+C4s:={};
+if i0 eq 0 then 
+A3s:=CsA3(y[1]); 
+C4s:=C4(y[2]);
+   for c1 in A3s do 
+         for c2 in C4s do 
+          x:=[0,0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i];
+               x[i+3]:=c2[i]*D;
+          end for;
+               x[7]:=c2[4]*D;
+          Cs join:={x};
+        end for;
+    end for;
+else 
+   Ys:={};
+    for s0,s1 in [0..y[2]] do 
+         if s0+s1 eq y[2] then 
+              Ys join:={[s0,s1]};
+         end if;
+     end for;
+    for s in Ys do 
+         A3s1:=CsA3(s[1]);
+         for sk in  A3s1 do 
+         x0:=[0,0,0,0];
+         x0[1]:=sk[1];
+         x0[2]:=sk[2];
+         x0[3]:=sk[3];
+         x0[4]:=s[2]*D;
+         A4s join:={x0};
+         end for;
+    end for;
+C3s:=C3(y[1]);
+for c1 in C3s do 
+    for c2 in A4s do 
+         x:=[0,0,0,0,0,0,0];
+         for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i];
+          end for;
+               x[7]:=c2[4];
+               Cs join:={x};
+      end for;
+end for;
+end if;
+return Cs;
+end function;            
+
+FINDCODE:=function(w,t);
+Codebk:={};
+Y:=SOL(w,t);
+al:=0;
+if w mod 3 eq 2 then al:=w-2;end if;
+if w mod 3 eq 0 then al:=w-3;end if;
+if w mod 3 eq 1 then al:=w-4;end if;
+for y in Y do 
+     yft:=MAX({y[i+1]:i in [0..1]});
+     Smax:={};
+     for i in [0..1] do 
+         if y[i+1] eq yft then Smax join:={y[i+1]};end if;
+     end for;
+     if #SUB(yft,y) ge 2 then 
+         Codebk join:=Cod0(y);
+     else 
+         i0:=MIN(SUB(yft,y));
+         ysd:=MAX({y[i+1]:i in [0..1]} diff Smax);
+         if yft-ysd ge 2then 
+              Codebk join:=Cod1(i0,y);
+         else 
+              if i0 le MIN(SUB(ysd,y))-1 then 
+                  Codebk join:=Cod1(i0,y);
+              else 
+                  Codebk join:=Cod0(y);
+              end if;
+        end if;
+     end if;
+end for;
+return Codebk;
+end function;
+
+At7Y:=FINDCODE(w,t);
+
+print "the sizes of C_3^7, A_3^7 and A_3^7(\Y) are: ",#Ct7,#At7,#At7Y;
+
+//Verify if they are equal
+if Ct7 eq At7 then print "C_3^7 eq A_3^7";else print "C_3^7 is not eq A_3^7";end if;
+if Ct7 eq At7Y then print "C_3^7 eq A_3^7(\Y)"; else print "C_3^7 is not eq A_3^7(\Y)";end if;
+if At7 eq At7Y then print "At7 eq A_3^7(\Y)";else print "At7 is not eq A_3^7(\Y)";end if;
+
+
+// -----------------t=3,w=7---------------------
+
+t:=3;
+w:=7;
+D:=2;
+//Generate code $C_t^{w+1}=C_3^8$
+CCG:=function(w,t);
+Y:={};
+for y0,y1,y2,y3,y4,y5,y6,y7 in [0..t] do 
+    if y0+y1+y2+y3+y4+y5+y6+y7 eq t then Y join:={[y0*D,y1*D,y2*D,y3*D,y4*D,y5*D,y6*D,y7*D]};end if;
+end for;
+return Y;
+end function;
+Ct8:=CCG(w,t);
+
+//Generate code $A_t^{w+1}=A_3^8$
+C5:=function(t);
+C5s:={};
+for x0,x1,x2,x3,x4 in [0..t] do 
+    if x0+x1+x2+x3+x4 eq t then C5s join:={[x0,x1,x2,x3,x4]};end if;
+end for;
+return C5s;
+end function;
+
+Ap:=function(j,k,t)
+As:={};
+As join:={[2*j,2*k,2*t-2*j-2*k],[2*j+1,2*k+1,2*t-2*k-2*j-2]};
+As join:={[2*j,2*k+3,2*t-2*k-2*j-3]};
+As join:={[2*j+1,2*k+4,2*t-2*k-2*j-5]};
+As join:={[2*(j+1)+1,2*k,2*t-2*k-2*j-3]};
+As join:={[2*(j+1),2*(k+1),2*t-2*k-2*j-4],[2*(j+1)+1,2*(k+1)+1,2*t-2*k-2*j-6]};
+As join:={[2*(j+1),2*(k+2)+1,2*t-2*k-2*j-7]};
+As join:={[2*(j+2),2*k+1,2*t-2*k-2*j-5]};
+As join:={[2*(j+2)+1,2*(k+1),2*t-2*k-2*j-7]};
+As join:={[2*(j+2),2*(k+2),2*t-2*k-2*j-8]};
+As join:={[2*(j+2)+1,2*(k+2)+1,2*t-2*k-2*j-10]};
+return As;
+end function;
+
+CsA3:=function(t);
+A3:={};
+if t eq 0 then A3:={[0,0,0]};end if;
+if t eq 1 then A3:={[2,0,0],[0,2,0],[0,0,2]};end if;
+if t eq 2 then A3:={[0,2,2],[2,0,2],[2,2,0],[4,0,0],[0,4,0],[0,0,4]};end if;
+if t ge 3 then 
+if t mod 3 eq 0 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 0 and j mod 3 eq 0 and i+j eq t then 
+              l:=6;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-6,6],[2*j+1,2*i-5,4],[2*j,2*i-3,3],[2*j+1,2*i-2,1],[2*j,2*i,0]};
+            A3 join:={[2*j+3,2*i-6,3],[2*j+2,2*i-4,2],[2*j+3,2*i-3,0]};
+            A3 join:={[2*j+4,2*i-5,1]};
+            A3 join:={[2*t,0,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 1 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 1 and j mod 3 eq 0 and i+j eq t then 
+              l:=4;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-2,2],[2*j+1,2*i-1,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 2 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 2 and j mod 3 eq 0 and i+j eq t then 
+              l:=5;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      A3 join:=Ap(j,k,t);
+                   end if;
+              end for;
+            A3 join:={[2*j,2*i-4,4],[2*j+1,2*i-3,2],[2*j,2*i-1,1]};
+            A3 join:={[2*j+3,2*i-4,1],[2*j+2,2*i-2,0]};
+      end if;
+    end for;
+end if;
+end if;
+A3p:={};
+for x in A3 do 
+     s:=1;
+     for i in [1..3] do 
+         if x[i] le -1 then s:=0;end if;
+     end for;
+     if s eq 1 then A3p join:={x};end if;
+end for;
+return A3p;
+end function;
+
+
+CsAt8:=function(t);
+Y:={};
+for y0,y1 in [0..t] do 
+     if y0+y1 eq t then Y join:={[y0,y1]};end if;
+end for;
+
+At8:={};
+for y in Y do 
+     A3:=CsA3(y[1]);
+     C5s:=C5(y[2]);
+     for g1 in A3 do 
+          for g2 in C5s do 
+               x:=[0,0,0,0,0,0,0];
+               x[1]:=g1[1];
+               x[2]:=g1[2];
+               x[3]:=g1[3];
+               x[4]:=g2[1]*D;
+               x[5]:=g2[2]*D;
+               x[6]:=g2[3]*D;
+               x[7]:=g2[4]*D;
+               x[8]:=g2[5]*D;
+               At8 join:={x};
+         end for;
+     end for;
+end for;
+return At8;
+end function;
+
+At8:=CsAt8(t);
+
+//Generate code $A_t^{w+1}(\Y)=A_3^8(\Y)$
+a:=(w+1-((w+1) mod 3))/3-1;
+SOL:=function(w,t);
+Y:={};
+for y0,ya in [0..t] do 
+    if y0+ya eq t then Y join:={[y0,ya]};end if;
+end for;
+return Y;
+end function;
+
+MAX:=function(S);
+ymax:=Random(S);
+for y in S do 
+     if y ge ymax then ymax:=y;end if;
+end for;
+return ymax;
+end function;
+
+MIN:=function(S);
+ymin:=Random(S);
+for y in S do 
+     if y le ymin then ymin:=y;end if;
+end for;
+return ymin;
+end function;
+
+SUB:=function(ymax,y);
+A:={};
+for i in [0..1] do 
+     if y[i+1] eq ymax then A join:={i};end if;
+end for;
+return A;
+end function;
+
+C2:=function(t);
+C2s:={};
+for y0,y1 in [0..t] do 
+    if y0+y1 eq t then 
+        C2s join:={[y0,y1]};
+    end if;
+end for;
+return C2s;
+end function;
+
+C3:=function(t);
+C3s:={};
+for y0,y1,y2 in [0..t] do 
+    if y0+y1+y2 eq t then 
+        C3s join:={[y0,y1,y2]};
+    end if;
+end for;
+return C3s;
+end function;
+
+C5:=function(t);
+C5s:={};
+for y0,y1,y2,y3,y4 in [0..t] do 
+    if y0+y1+y2+y3+y4 eq t then 
+        C5s join:={[y0,y1,y2,y3,y4]};
+    end if;
+end for;
+return C5s;
+end function;
+
+Cod0:=function(y);
+Cs:={};
+C3s1:=C3(y[1]);
+C5s2:=C5(y[2]);
+     for c1 in C3s1 do 
+         for c2 in C5s2 do 
+          x:=[0,0,0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i]*D;
+          end for;
+               x[7]:=c2[4]*D;
+               x[8]:=c2[5]*D;
+          Cs join:={x};
+        end for;
+    end for;
+return Cs;
+end function;
+
+Cod1:=function(i0,y);
+Cs:={};
+A3s:={};
+A5s:={};
+C3s:={};
+C5s:={};
+if i0 eq 0 then 
+A3s:=CsA3(y[1]); 
+C5s:=C5(y[2]);
+   for c1 in A3s do 
+         for c2 in C5s do 
+          x:=[0,0,0,0,0,0,0,0];
+          for i in [1..3] do
+               x[i]:=c1[i];
+               x[i+3]:=c2[i]*D;
+          end for;
+               x[7]:=c2[4]*D;
+               x[8]:=c2[5]*D;
+          Cs join:={x};
+        end for;
+    end for;
+else 
+   Ys:={};
+    for s0,s1 in [0..y[2]] do 
+         if s0+s1 eq y[2] then 
+              Ys join:={[s0,s1]};
+         end if;
+     end for;
+    for s in Ys do 
+         A3s1:=CsA3(s[1]);
+         C2s:=C2(s[2]);
+         for sk1 in  A3s1 do 
+              for sk2 in C2s do 
+         x0:=[0,0,0,0,0];
+         x0[1]:=sk1[1];
+         x0[2]:=sk1[2];
+         x0[3]:=sk1[3];
+         x0[4]:=sk2[1]*D;
+         x0[5]:=sk2[2]*D;
+         A5s join:={x0};
+         end for;
+    end for;
+  end for;
+C3s:=C3(y[1]);
+for c1 in C3s do 
+    for c2 in A5s do 
+         x:=[0,0,0,0,0,0,0,0];
+         for i in [1..3] do
+               x[i]:=c1[i]*D;
+               x[i+3]:=c2[i];
+          end for;
+               x[7]:=c2[4];
+               x[8]:=c2[5];
+               Cs join:={x};
+      end for;
+end for;
+end if;
+return Cs;
+end function;            
+
+FINDCODE:=function(w,t);
+Codebk:={};
+Y:=SOL(w,t);
+al:=0;
+if w mod 3 eq 2 then al:=w-2;end if;
+if w mod 3 eq 0 then al:=w-3;end if;
+if w mod 3 eq 1 then al:=w-4;end if;
+for y in Y do 
+     yft:=MAX({y[i+1]:i in [0..1]});
+     Smax:={};
+     for i in [0..1] do 
+         if y[i+1] eq yft then Smax join:={y[i+1]};end if;
+     end for;
+     if #SUB(yft,y) ge 2 then 
+         Codebk join:=Cod0(y);
+     else 
+         i0:=MIN(SUB(yft,y));
+         ysd:=MAX({y[i+1]:i in [0..1]} diff Smax);
+         if yft-ysd ge 2 then 
+              Codebk join:=Cod1(i0,y);
+         else 
+              if i0 le MIN(SUB(ysd,y))-1 then 
+                  Codebk join:=Cod1(i0,y);
+              else 
+                  Codebk join:=Cod0(y);
+              end if;
+        end if;
+     end if;
+end for;
+return Codebk;
+end function;
+
+At8Y:=FINDCODE(w,t);
+
+print "the sizes of C_3^8, A_3^8 and A_3^8(\Y) are: ",#Ct8,#At8,#At8Y;
+
+//Verify if they are equal
+if Ct8 eq At8 then print "C_3^8 eq A_3^8";else print "C_3^8 is not eq A_3^8";end if;
+if Ct8 eq At8Y then print "C_3^8 eq A_3^8(\Y)"; else print "C_3^8 is not eq A_3^8(\Y)";end if;
+if At8 eq At8Y then print "At8 eq A_3^8(\Y)";else print "At8 is not eq A_3^8(\Y)";end if;
+
+
+
+
+
