@@ -5,6 +5,88 @@ w:=4;
 //You can set different $t>=1$ to verify
 t:=3;
 ----------------------------------------for $B_t^5$----------------------------------------------
+// construct codewords as defined in Table II
+Bp:=function(j,k,t)
+Bs:={};
+Bs join:={[2*j,2*k,2*t-2*j-2*k+1],[2*j+1,2*k+1,2*t-2*k-2*j-1]};
+Bs join:={[2*j,2*k+3,2*t-2*k-2*j-2]};
+Bs join:={[2*j+1,2*k+4,2*t-2*k-2*j-4]};
+Bs join:={[2*(j+1)+1,2*k,2*t-2*k-2*j-2]};
+Bs join:={[2*(j+1),2*(k+1),2*t-2*k-2*j-3],[2*(j+1)+1,2*(k+1)+1,2*t-2*k-2*j-5]};
+Bs join:={[2*(j+1),2*(k+2)+1,2*t-2*k-2*j-6]};
+Bs join:={[2*(j+2),2*k+1,2*t-2*k-2*j-4]};
+Bs join:={[2*(j+2)+1,2*(k+1),2*t-2*k-2*j-6]};
+Bs join:={[2*(j+2),2*(k+2),2*t-2*k-2*j-7]};
+Bs join:={[2*(j+2)+1,2*(k+2)+1,2*t-2*k-2*j-9]};
+return Bs;
+end function;
+
+//construct code $B_t^3$ in Construction III.1 (2)
+CsB3:=function(t);
+B3:={};
+if t eq 0 then B3:={[0,0,1]};end if;
+if t eq 1 then B3:={[0,3,0],[3,0,0],[0,0,3],[1,1,1]};end if;
+if t eq 2 then B3:={[0,0,5],[1,1,3],[0,3,2],[0,5,0],[3,0,2],[2,2,1],[5,0,0]};end if;
+if t ge 3 then 
+if t mod 3 eq 0 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 0 and j mod 3 eq 0 and i+j eq t then 
+              l:=6;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      B3 join:=Bp(j,k,t);
+                   end if;
+              end for;
+            B3 join:={[2*j,2*i-6,7],[2*j+1,2*i-5,5],[2*j,2*i-3,4],[2*j+1,2*i-2,2],[2*j,2*i,1]};
+            B3 join:={[2*j+3,2*i-6,4],[2*j+2,2*i-4,3],[2*j+3,2*i-3,1],[2*j+2,2*i-1,0]};
+            B3 join:={[2*j+4,2*i-5,2],[2*j+5,2*i-4,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 1 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 1 and j mod 3 eq 0 and i+j eq t then 
+              l:=4;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      B3 join:=Bp(j,k,t);
+                   end if;
+              end for;
+            B3 join:={[2*j,2*i-2,3],[2*j+1,2*i-1,1],[2*j,2*i+1,0]};
+           B3 join:={[2*j+3,2*i-2,0]};
+           B3 join:={[2*t+1,0,0]};
+      end if;
+    end for;
+end if;
+
+if t mod 3 eq 2 then 
+    for i,j in [0..t] do 
+        if i mod 3 eq 2 and j mod 3 eq 0 and i+j eq t then 
+              l:=5;
+              for k in [0..i-l] do 
+                   if k mod 3 eq 0 then 
+                      B3 join:=Bp(j,k,t);
+                   end if;
+              end for;
+            B3 join:={[2*j,2*i-4,5],[2*j+1,2*i-3,3],[2*j,2*i-1,2],[2*j+1,2*i,0]};
+            B3 join:={[2*j+3,2*i-4,2],[2*j+2,2*i-2,1]};
+            B3 join:={[2*j+4,2*i-3,0]};
+      end if;
+    end for;
+end if;
+end if;
+B3p:={};
+for x in B3 do 
+     s:=1;
+     for i in [1..3] do 
+         if x[i] le -1 then s:=0;end if;
+     end for;
+     if s eq 1 then B3p join:={x};end if;
+end for;
+return B3p;
+end function;
+
 C2:=function(t);
 C2s:={};
 for x0,x1 in [0..t] do 
