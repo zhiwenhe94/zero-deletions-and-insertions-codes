@@ -216,7 +216,6 @@ end for;
 return Codebk;
 end function;
 
-
 // check the minimum distance of $A_t^{w+1}(\Y)$ $D=2$
 DisCk:=function(A);
 Dt:={};
@@ -235,12 +234,6 @@ if MIN(Dt) eq D then else ck:=0;end if;
 return ck;
 end function;
 
-At6Y:=FINDCODE(w,t);
-if DisCk(At6Y) eq 1 then print "The code At6Y has minimum distance 2.";end if;
-
-//size of At6Y
-#At6Y;
-
 //check constant weight
 WeiCk:=function(At6Y);
 W:={};
@@ -251,12 +244,14 @@ for y in At6Y do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 and Random(W) eq 2*t then return 2*t; else return 0;end if;
+if #W eq 1 and Random(W) eq 2*t then return 2*t; else return -1;end if;
 end function;
-WeiCk(At6Y);
 
 
-// the number of codes from classical construction $\C_t^{w+1}(r)$
-Can:=function(t,w);
-return Binomial(t+w,w);
-end function;
+// Output the information of the code A_t^6(Y)
+At6Y:=FINDCODE(w,t);
+print "the code A_t^6(Y) is:",At6Y;
+print "the size of the code A_t^6(Y) is:",#At6Y;
+if DisCk(At6Y) eq 1 then print "The code A_t^6(Y) has minimum distance 2.";end if;
+if WeiCk(At6Y) ge 0 then print "The code A_t^6(Y) has constant weight ",WeiCk(At6Y);else print "The code A_t^6(Y) is not a constant weight code";end if;
+
