@@ -85,7 +85,7 @@ end for;
 return A3p;
 end function;
 
-//------------------------------------------for $A_t^4$-----------------------------------------------
+//construct code $A_t^4$
 CsAt4:=function(t);
 Y:={};
 for y0,y1 in [0..t] do 
@@ -141,10 +141,6 @@ if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
 
-At4:=CsAt4(t);
-if DisCk(At4) eq 1 then print "The code At4 has minimum distance 2.";end if;
-
-
 // check the size of $A_t^4$
 SizCk:=function(t,At4);
 Ck:=0;
@@ -161,7 +157,7 @@ end if;
 if At4size eq #At4 then Ck:=1;end if;
 return Ck;
 end function;
-if SizCk(t,At4) eq 1 then print "the results about the size in Theorem IV.1 are correct.";end if;
+
 
 //check constant weight
 WeiCk:=function(At4)
@@ -173,8 +169,15 @@ for y in At4 do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then return Random(W);else return 0;end if;
+if #W eq 1 then return Random(W);else return -1;end if;
 end function;
 WeiCk(At4);
 
 
+// Output the information of the code A_t^4
+At4:=CsAt4(t);
+print "the code A_t^4 is:",At4;
+print "the size of the code A_t^4 is:",#At4;
+if DisCk(At4) eq 1 then print "The code A_t^4 has minimum distance 2.";end if;
+if SizCk(t,At4) eq 1 then print "the results about the size in Theorem IV.1 are correct.";end if;
+if WeiCk(At4) ge 0 then print "The code A_t^4 has constant weight ",WeiCk(At4);else print "The code A_t^4 is not a constant weight code";end if;
