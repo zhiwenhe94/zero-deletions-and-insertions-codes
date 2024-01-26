@@ -153,9 +153,6 @@ if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
 
-At5:=CsAt5(t);
-if DisCk(At5) eq 1 then print "The code At5 has minimum distance 2.";end if;
-
 
 // check the size of $A_t^5$
 SizCk:=function(t,At5);
@@ -199,7 +196,6 @@ end if;
 if At5size eq #At5 then Ck:=1;end if;
 return Ck;
 end function;
-if SizCk(t,At5) eq 1 then print "the results about the size in Theorem IV.2 are correct.";end if;
 
 
 //check constant weight
@@ -212,6 +208,15 @@ for y in At5 do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then return Random(W);else return 0;end if;
+if #W eq 1 then return Random(W);else return -1;end if;
 end function;
 WeiCk(At5);
+
+
+// Output the information of the code A_t^5
+At5:=CsAt5(t);
+print "the code A_t54 is:",At5;
+print "the size of the code A_t^5 is:",#At5;
+if DisCk(At5) eq 1 then print "The code A_t^5 has minimum distance 2.";end if;
+if SizCk(t,At5) eq 1 then print "the results about the size in Theorem IV.2 are correct.";end if;
+if WeiCk(At5) ge 0 then print "The code A_t^5 has constant weight ",WeiCk(At5);else print "The code A_t^5 is not a constant weight code";end if;
