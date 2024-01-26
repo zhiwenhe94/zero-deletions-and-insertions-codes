@@ -119,9 +119,6 @@ return ck;
 end function;
 
 
-B3:=CsB3(t);
-if DisCk(B3) eq 1 then print "The code B3 has minimum distance 2.";end if;
-
 // check the size of $B_t^3$
 SizCka:=function(t,B3);
 B3size:=0;
@@ -138,7 +135,6 @@ end if;
 if B3size eq #B3 then Ck:=1;end if;
 return Ck;
 end function;
-if SizCka(t,B3) eq 1 then print "the results about the size in Theorem III.1 are correct.";end if;
 
 //check constant weight
 WeiCk:=function(B);
@@ -152,5 +148,12 @@ for y in B do
 end for;
 if #W eq 1 and Random(W) eq 2*t+1 then return 2*t+1;else return 0;end if;
 end function;
-WeiCk(B3);
 
+
+// Output the information of the code B_t^3
+B3:=CsB3(t);
+print "the code B_t^3 is:",B3;
+print "the size of the code B_t^3 is:",#B3;
+if DisCk(B3) eq 1 then print "The code B_t^3 has minimum distance 2.";end if;
+if SizCkb(t,B3) eq 1 then print "The results about the size in Theorem III.1 are correct.";end if;
+if WeiCk(B3) ge 0 then print "The code B_t^3 has constant weight ",WeiCk(B3);else print "The code B_t^3 is not a constant weight code";end if;
