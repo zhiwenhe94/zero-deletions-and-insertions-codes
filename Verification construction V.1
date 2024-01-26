@@ -195,7 +195,7 @@ end function;
 Btws:=Btw(t,w,D);
 print "the code B_t^{w+1} is:",Btws;
 print "the size of the code B_t^{w+1} is:",#Btws;
-if DisCk(Btws) eq 1 then print "The code B_t^{w+1} has minimum distance 2.";end if;
+if DisCk(Btws) eq 1 then print "The code B_t^{w+1} has minimum distance:",D;end if;
 if SizCk(t,Btws) eq 1 then print "the results about the size in Theorem V.3 are correct.";end if;
 if WeiCk(Btws) ge 0 then print "The code B_t^{w+1} has constant weight ",WeiCk(Btws);else print "The code B_t^{w+1} is not a constant weight code";end if;
 
