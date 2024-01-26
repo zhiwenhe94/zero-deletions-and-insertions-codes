@@ -284,3 +284,14 @@ for y in At7Y do
     W join:={ys};
 end for;
 if #W eq 1 and Random(W) eq 2*t then print "At7Y has constant weight 2t=",2*t;end if;
+
+
+
+// Output the information of the code A_t^7(Y)
+At7Y:=FINDCODE(w,t);
+print "the code A_t^7(Y) is:",At7Y;
+print "the size of the code A_t^7(Y) is:",#At7Y;
+if DisCk(At7Y) eq 1 then print "The code A_t^7(Y) has minimum distance 2.";end if;
+if WeiCk(At7Y) ge 0 then print "The code A_t^7(Y) has constant weight ",WeiCk(At7Y);else print "The code A_t^7(Y) is not a constant weight code";end if;
+
+
