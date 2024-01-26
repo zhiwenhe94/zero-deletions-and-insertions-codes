@@ -150,7 +150,7 @@ if #W eq 1 and Random(W) eq 2*t then return 2*t;else return -1;end if;
 end function;
 
 
-// Output the information of the code A_t^8(Y)
+// Output the information of the code A_t^3
 A3:=CsA3(t);
 print "the code A_t^3 is:",A3;
 print "the size of the code A_t^3 is:",#A3;
