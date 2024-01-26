@@ -117,8 +117,6 @@ if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
 
-A3:=CsA3(t);
-if DisCk(A3) eq 1 then print "The code A_t^3 has minimum distance 2.";end if;
 
 // check the size of $A_t^3$
 SizCkb:=function(t,A3);
@@ -137,7 +135,6 @@ if A3size eq #A3 then Ck:=1;end if;
 return Ck;
 end function;
 
-if SizCkb(t,A3) eq 1 then print "the results about the size in Theorem III.1 are correct.";end if;
 
 //check constant weight
 WeiCk:=function(A);
@@ -149,9 +146,16 @@ for y in A do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 and Random(W) eq 2*t then return 2*t;else return 0;end if;
+if #W eq 1 and Random(W) eq 2*t then return 2*t;else return -1;end if;
 end function;
-WeiCk(A3);
 
+
+// Output the information of the code A_t^8(Y)
+A3:=CsA3(t);
+print "the code A_t^3 is:",A3;
+print "the size of the code A_t^3 is:",#A3;
+if DisCk(A3) eq 1 then print "The code A_t^3 has minimum distance 2.";end if;
+if SizCkb(t,A3) eq 1 then print "the results about the size in Theorem III.1 are correct.";end if;
+if WeiCk(A3) ge 0 then print "The code A_t^3 has constant weight ",WeiCk(A3);else print "The code A_t^3 is not a constant weight code";end if;
 
 
