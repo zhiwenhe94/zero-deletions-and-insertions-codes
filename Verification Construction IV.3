@@ -154,9 +154,6 @@ if MIN(Dt) eq 2 then else ck:=0;end if;
 return ck;
 end function;
 
-Bt5:=CsBt5(t);
-if DisCk(Bt5) eq 1 then print "The code Bt5 has minimum distance 2.";end if;
-
 
 // check the size of $B_t^5$
 SizCk:=function(t,Bt5);
@@ -192,8 +189,6 @@ end if;
 if Bt5size eq #Bt5 then Ck:=1;end if;
 return Ck;
 end function;
-if SizCk(t,Bt5) eq 1 then print "the results about the size in Theorem IV.3 are correct.";end if;
-
 
 //check constant weight
 WeiCk:=function(Bt5);
@@ -207,4 +202,11 @@ for y in Bt5 do
 end for;
 if #W eq 1 then return Random(W);else return 0;end if;
 end function;
-WeiCk(Bt5);
+
+// Output the information of the code B_t^5
+Bt5:=CsBt5(t);
+print "the code B_t^5 is:",Bt5;
+print "the size of the code B_t^5 is:",#Bt5;
+if DisCk(Bt5) eq 1 then print "The code B_t^5 has minimum distance 2.";end if;
+if SizCk(t,Bt5) eq 1 then print "the results about the size in Theorem IV.3 are correct.";end if;
+if WeiCk(Bt5) ge 0 then print "The code B_t^5 has constant weight ",WeiCk(Bt5);else print "The code B_t^5 is not a constant weight code";end if;
