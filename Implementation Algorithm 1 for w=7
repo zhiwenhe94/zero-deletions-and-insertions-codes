@@ -284,14 +284,8 @@ if MIN(Dt) eq D then else ck:=0;end if;
 return ck;
 end function;
 
-At8Y:=FINDCODE(w,t);
-if DisCk(At8Y) eq 1 then print "The code At8Y has minimum distance 2.";end if;
-
-//size of At8Y
-#At8Y;
-
-
 //check constant weight
+WeiCk:=function(At8Y);
 W:={};
 for y in At8Y do 
      ys:=0;
@@ -300,4 +294,16 @@ for y in At8Y do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 and Random(W) eq 2*t then print "Bt8Y has constant weight 2t=",2*t;end if;
+if #W eq 1 and Random(W) eq 2*t then return 2*t; else return -1;end if;
+end function;
+
+// Output the information of the code A_t^8(Y)
+At8Y:=FINDCODE(w,t);
+print "the code A_t^8(Y) is:",At8Y;
+print "the size of the code A_t^8(Y) is:",#At8Y;
+if DisCk(At8Y) eq 1 then print "The code A_t^8(Y) has minimum distance 2.";end if;
+if WeiCk(At8Y) ge 0 then print "The code A_t^8(Y) has constant weight ",WeiCk(At8Y);else print "The code A_t^8(Y) is not a constant weight code";end if;
+
+
+
+
