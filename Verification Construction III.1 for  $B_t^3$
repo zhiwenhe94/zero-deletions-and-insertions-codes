@@ -120,21 +120,14 @@ end function;
 
 
 // check the size of $B_t^3$
-SizCka:=function(t,B3);
+SizCkb:=function(t,B3);
 B3size:=0;
 Ck:=0;
-if t mod 3 eq 0 then 
-    B3size:=Binomial(t+2,2)+Binomial(t+1,2)/3;
-end if;
-if t mod 3 eq 1 then 
-    B3size:=Binomial(t+2,2)+Binomial(t+1,2)/3+2/3;
-end if;
-if t mod 3 eq 2 then 
-    B3size:=Binomial(t+2,2)+Binomial(t+1,2)/3;
-end if;
+B3size:=Binomial(t+2,2)+Ceiling(Binomial(t+1,2)/3);
 if B3size eq #B3 then Ck:=1;end if;
 return Ck;
 end function;
+
 
 //check constant weight
 WeiCk:=function(B);
