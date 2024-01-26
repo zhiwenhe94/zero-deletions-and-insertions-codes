@@ -154,9 +154,6 @@ if MIN(Dt) eq D then else ck:=0;end if;
 return ck;
 end function;
 
-Btws:=Btw(t,w,D);
-if DisCk(Btws) eq 1 then print "The code Btws has minimum distance D.";end if;
-
 
 //check constant weight
 WeiCk:=function(Btws);
@@ -168,9 +165,8 @@ for y in Btws do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 then return Random(W);else return 0;end if;
+if #W eq 1 then return Random(W);else return -1;end if;
 end function;
-WeiCk(Btws);
 
 
 //check the number result in Theorem V.3
@@ -194,5 +190,12 @@ if #Btws eq Btwsize then Ck:=1;end if;
 return Ck;
 end function;
 
+
+// Output the information of the code B_t^5
+Btws:=Btw(t,w,D);
+print "the code B_t^{w+1} is:",Btws;
+print "the size of the code B_t^{w+1} is:",#Btws;
+if DisCk(Btws) eq 1 then print "The code B_t^{w+1} has minimum distance 2.";end if;
 if SizCk(t,Btws) eq 1 then print "the results about the size in Theorem V.3 are correct.";end if;
+if WeiCk(Btws) ge 0 then print "The code B_t^{w+1} has constant weight ",WeiCk(Btws);else print "The code B_t^{w+1} is not a constant weight code";end if;
 
