@@ -308,6 +308,8 @@ end function;
 
 At8Y:=FINDCODE(w,t);
 
+//Output the information of the three types of codes
+print "the codes C_3^8, A_3^8 and A_3^8(\Y) are:",Ct8,At8,At8Y;
 print "the sizes of C_3^8, A_3^8 and A_3^8(\Y) are: ",#Ct8,#At8,#At8Y;
 
 //Verify if they are equal
