@@ -267,14 +267,8 @@ if MIN(Dt) eq D then else ck:=0;end if;
 return ck;
 end function;
 
-At7Y:=FINDCODE(w,t);
-if DisCk(At7Y) eq 1 then print "The code At7Y has minimum distance 2.";end if;
-
-//size of At7Y
-#At7Y;
-
-
 //check constant weight
+WeiCk:=function(At7Y);
 W:={};
 for y in At7Y do 
      ys:=0;
@@ -283,9 +277,8 @@ for y in At7Y do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 and Random(W) eq 2*t then print "At7Y has constant weight 2t=",2*t;end if;
-
-
+if #W eq 1 and Random(W) eq 2*t then return 2*t; else return -1;end if;
+end function;
 
 // Output the information of the code A_t^7(Y)
 At7Y:=FINDCODE(w,t);
