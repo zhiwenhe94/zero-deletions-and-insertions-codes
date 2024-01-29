@@ -139,7 +139,7 @@ for y in B do
      end for;
     W join:={ys};
 end for;
-if #W eq 1 and Random(W) eq 2*t+1 then return 2*t+1;else return 0;end if;
+if #W eq 1 and Random(W) eq 2*t+1 then return 2*t+1;else return -1;end if;
 end function;
 
 
