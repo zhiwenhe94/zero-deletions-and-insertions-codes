@@ -111,7 +111,7 @@ Functionality: Used for checking the constant weight of $A$.
 
 Input: a code $A$.
 
-Output: $2t$, if A has constant weight $Dt=2t$; $0$, otherwise.
+Output: $2t$, if A has constant weight $Dt=2t$; $-1$, otherwise.
 
 
 
@@ -126,7 +126,7 @@ It is similar to **Algorithm "Verification Construction IV.1"**.
 
 Functionality: Used to obtain a constant weight code $B_t^{w+1}=B_t^5$ in Construction IV.3.
 
-Input: a positive integer $t\geq1$.
+Input: a positive integer $t$.
 
 Output: a constant weight code $B_t^{w+1}=B_t^5$ in Construction IV.3 with length $w+1=5$, distance $D=2$ and constant weight $2t+1$.
 
@@ -155,7 +155,7 @@ Functionality: Used for checking the constant weight of $B$.
 
 Input: a code $B$.
 
-Output: $2t+1$, if B has constant weight $2t+1$; $0$, otherwise.
+Output: $2t+1$, if B has constant weight; $-1$, otherwise.
 
 
 
