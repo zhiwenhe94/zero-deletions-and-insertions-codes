@@ -196,11 +196,11 @@ Output: $3D+D/2$, if $B$ has constant weight; $-1$, otherwise.
 ## Implementation Algorithm 1 for $w=5$
 ### function $FINDCODE(w,t)$
 
-Functionality: Used to obtain a constant weight code $A_t^{w+1}(Y)$ in Algorithm 1.
+Functionality: Used to obtain a constant weight code $A_t^{w+1}(\mathcal{Y})$ in Algorithm 1.
 
 Input: integers $w$ and $t$ such that $w=5$ and $t\geq3$.
 
-Output: a constant weight code $A_t^{w+1}(Y)$ with length $w+1=6$, distance $D=2$ and constant weight $2t$. 
+Output: a constant weight code $A_t^{w+1}(\mathcal{Y})$ with length $w+1=6$, distance $D=2$ and constant weight $2t$. 
 
 ### function $DisCk(A)$
 
@@ -227,7 +227,7 @@ Functionality: Used for checking whether these three codes are equal.
 
 Input: a positive integer $t$.
 
-Output: the codes $C_3^6,A_3^6$ and $A_3^6(mathcal{Y})$, the sizes of these codes, and whether they are equal.
+Output: the codes $C_3^6,A_3^6$ and $A_3^6(\mathcal{Y})$, the sizes of these codes, and whether they are equal.
 
 ## Comparisons between codes $\mathcal{C}_t^{w+1}$, $A_t^{w+1}$, and $A_t^{w+1}(\mathcal{Y})$ for $w=6,7$
 **These two cases are similar to the case of $w=5$.**
