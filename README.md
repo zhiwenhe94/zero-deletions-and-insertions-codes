@@ -198,7 +198,7 @@ Output: $3D+D/2$, if $B$ has constant weight; $-1$, otherwise.
 
 Functionality: Used to obtain a constant weight code $A_t^{w+1}(Y)$ in Algorithm 1.
 
-Input: integers $w$ and $t$ such that $w=5$ and $t>=3$.
+Input: integers $w$ and $t$ such that $w=5$ and $t\geq3$.
 
 Output: a constant weight code $A_t^{w+1}(Y)$ with length $w+1=6$, distance $D=2$ and constant weight $2t$. 
 
@@ -216,7 +216,7 @@ Functionality: Used for checking the constant weight of $A$.
 
 Input: a code $A$.
 
-Output: $2t$, if $A$ has constant weight $2t$; $0$, otherwise.
+Output: $2t$, if $A$ has constant weight; $-1$, otherwise.
 
 ## Implementation Algorithm 1 for $w=6$ and $7$
 **These two cases are similar to the case of $w=5$.**
