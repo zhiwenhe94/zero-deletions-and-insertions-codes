@@ -221,6 +221,14 @@ Output: $2t$, if $A$ has constant weight; $-1$, otherwise.
 ## Implementation Algorithm 1 for $w=6$ and $7$
 **These two cases are similar to the case of $w=5$.**
 
+## Comparisons between codes $\C_t^{w+1}$, $A_t^{w+1}$, and $A_t^{w+1}(\Y)$ for $w=5$
 
+Functionality: Used for checking whether these three codes are equal.
 
+Input: a positive integer $t$.
+
+Output: the codes $C_3^6,A_3^6$ and $A_3^6(Y)$, the sizes of these codes, and whether they are equal.
+
+## Comparisons between codes $\C_t^{w+1}$, $A_t^{w+1}$, and $A_t^{w+1}(\Y)$ for $w=6,7$
+**These two cases are similar to the case of $w=5$.**
 
