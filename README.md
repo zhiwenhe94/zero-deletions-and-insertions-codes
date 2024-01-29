@@ -165,9 +165,9 @@ Output: $2t+1$, if B has constant weight; $-1$, otherwise.
 
 Functionality: Used to obtain a constant weight code $B_t^{w+1}$ in Construction V.1.
 
-Input: positive integers $t=3$, $w=5$ and even $D\geq 4$. 
+Input: positive integers $t=3$, $w$ and even $D\geq 4$. 
 
-Output: a constant weight code $B_t^{w+1}$ in Construction V.1 with length $w+1=6$, distance $D$ and constant weight $3D+D/2$..
+Output: a constant weight code $B_t^{w+1}$ in Construction V.1 with length $w+1$, distance $D$ and constant weight $3D+D/2$.
 
 ### function $DisCk(B)$
 
@@ -191,7 +191,7 @@ Functionality: Used for checking the constant weight of $B$.
 
 Input: a code $B$.
 
-Output: $3D+D/2$, if $B$ has constant weight $3D+D/2$; $0$, otherwise.
+Output: $3D+D/2$, if $B$ has constant weight; $-1$, otherwise.
 
 ## Implementation Algorithm 1 for $w=5$
 ### function $FINDCODE(w,t)$
